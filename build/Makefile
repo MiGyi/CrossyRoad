@@ -1,2 +1,12 @@
+CXX      := -g++
+CXXFLAGS := -O2 -Wall -Wno-missing-braces
+LDFLAGS  := -L ../lib/ -lraylib -lopengl32 -lgdi32 -lwinmm
+BUILD    := build
+TARGET   := Game.exe
+INCLUDES  := -I ../include/ 
+SRC      :=                      \
+   $(wildcard ../src/*.cpp)         \
+   $(wildcard ../src/COBJECT/*.cpp) \
+
 default:
-	g++ ../src/*.cpp -o Game.exe -O2 -Wall -Wno-missing-braces -I ../include/ -L ../lib/ -lraylib -lopengl32 -lgdi32 -lwinmm
+	$(CXX) $(CXXFLAGS) $(SRC) -o $(TARGET) $(OBJ) $(INCLUDES) $(LDFLAGS)
