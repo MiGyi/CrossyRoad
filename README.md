@@ -8,3 +8,5 @@ How to build:
 Run: 
 1. cd CrossyRoad/build
 2. ./Game.exe
+
+Guide: https://www.youtube.com/watch?v=anEqFr8sJnA
