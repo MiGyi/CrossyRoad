@@ -4,15 +4,19 @@ using namespace std;
  
 CMap::CMap() {
     int y = 0;
-    int Rand[5] = { 1, 1, 0, 0, 0 }; // 1: safe, 0: unsafe
-    shuffle(Rand, Rand + 5, default_random_engine(time(NULL)));
-    for (int i = 0; i < 5; i++) {
-        int getRand = GetRandomValue(0, 1);
+    int RandLineSafety[NumberOfLine - 1]; // 1: safe, 0: unsafe
+    for (int i = 0; i < NumberOfLine - 4; i++) RandLineSafety[i] = 0;
+    for (int i = NumberOfLine - 4; i < NumberOfLine - 1; i++) RandLineSafety[i] = 1;
+    shuffle(RandLineSafety, RandLineSafety + NumberOfLine - 1, default_random_engine(time(NULL)));
+    for (int i = 0; i < NumberOfLine - 1; i++) {
+        int getRand = GetRandomValue(0, 1); // 0: Vehicle from right to left, 1: Vehicle from left to right
+        int getRandType = GetRandomValue(0, 1); //0: Forest, 1: Road
         getRand += getRand;
-        Lines.push_back(new CLine(y, Rand[i], 15.0f * (getRand - 1.0f), 5));
+        if (getRandType) Lines.push_back(new CRoad(y, RandLineSafety[i], 50.0f * (getRand - 1.0f), 5));
+            else Lines.push_back(new CForest(y, RandLineSafety[i], 50.0f * (getRand - 1.0f), 5));
         y += LineHeight;
     }
-    Lines.push_back(new CLine(y, true, 0, 0)); // safe line
+    Lines.push_back(new CForest(y, true, 0, 0)); // first line is always safe
 }
 
 bool CMap::Collision(Rectangle Player) {

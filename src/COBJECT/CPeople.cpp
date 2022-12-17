@@ -1,8 +1,5 @@
 #include "CPeople.h"
 
-const int PeopleWidth = 100;
-const int PeopleHeight = 100;
-
 CPeople::CPeople()
 {
     x = (screenWidth - PeopleWidth) / 2;

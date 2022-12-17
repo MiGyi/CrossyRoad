@@ -15,17 +15,17 @@
 #include <iostream>
 
 class CLine {
-    private:
+    protected:
         float x, y;
         float speed;
         std::vector <CObject *> Objects;
         bool isSafe = false;
         int MaxObject;
 
-    public:
-        CLine(float y, bool isSafe, float speed, int MaxObject); 
+    public: 
         void Update(float DeltaTime);
         void Draw();
+        virtual void GenerateObject() = 0;
         bool Collision(Rectangle Player);
-        ~CLine();
 };
+

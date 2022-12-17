@@ -17,8 +17,8 @@ class CAnimal: public CObject {
         
     public:
         CAnimal(float y, float speed, bool FromLeftToRight); 
-        virtual void Update(float DeltaTime);
-        virtual bool move_by_vector(float x, float y);
-        virtual void Draw();
-        virtual ~CAnimal();
+        void Update(float DeltaTime);
+        void Draw();
+        Rectangle getBoundingBox();
+        ~CAnimal();
 };

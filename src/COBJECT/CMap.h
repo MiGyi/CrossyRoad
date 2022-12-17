@@ -7,6 +7,8 @@
 #include "CVehicle.h"
 #include "CAnimal.h"
 #include "CLine.h"
+#include "CRoad.h"
+#include "CForest.h"
 
 #include <algorithm>
 #include <math.h>

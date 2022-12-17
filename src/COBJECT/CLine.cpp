@@ -2,14 +2,9 @@
 
 using namespace std;
 
-CLine::CLine(float y, bool isSafe, float speed, int MaxObject) {
-    this->y = y;
-    this->speed = speed;
-    this->isSafe = isSafe;
-    this->MaxObject = isSafe ? 0 : MaxObject;
-}
-
 void CLine::Update(float DeltaTime) {
+    cerr << "Check upd line 1" << endl;
+
     if (isSafe) return;
 
     if (Objects.size() > 0) {
@@ -25,14 +20,7 @@ void CLine::Update(float DeltaTime) {
 
     }
 
-    if (Objects.size() < MaxObject) {
-        if (Objects.empty() || (this->speed > 0 && Objects.back()->GetX() > 200.0f) || (this->speed < 0 && Objects.back()->GetX() < screenWidth - 200.0f)) {
-            int Rand = GetRandomValue(0, 70);
-            if (Rand == 1) {
-                Objects.push_back(new CVehicle(y, speed, speed > 0));
-            }
-        }
-    }
+    GenerateObject();
 
     for (auto &i : Objects) {
         i->Update(DeltaTime);
@@ -53,11 +41,4 @@ bool CLine::Collision(Rectangle Player) {
         if (CheckCollisionRecs(Player, i->getBoundingBox())) return true;
     }
     return false;
-}
-
-CLine::~CLine() {
-    while (!Objects.empty()) {
-        delete Objects.back();
-        Objects.pop_back();
-    }
 }

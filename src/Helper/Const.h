@@ -7,10 +7,14 @@
 const int screenWidth = 1400;
 const int screenHeight = 900;
 
+const int PeopleWidth = 70;
+const int PeopleHeight = 70;
+
 const int VehicleWidth = 150;
 const int VehicleHeight = 100;
 
 const int AnimalWidth = 100;
 const int AnimalHeight = 100;
 
-const int LineHeight = 150;
+const int NumberOfLine = 9;
+const int LineHeight = screenHeight / NumberOfLine; //1 map = 9 lines

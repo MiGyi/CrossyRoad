@@ -3,29 +3,27 @@
 using namespace std;
 
 CAnimal::CAnimal(float y, float speed, bool FromLeftToRight) {
-    this->x = FromLeftToRight ? 0 : screenWidth;
+    this->x = FromLeftToRight ? -AnimalWidth : screenWidth;
     this->y = y;
     this->speed = speed;
     if (!FromLeftToRight && speed > 0) speed = -speed;
-    move_by_vector(0, 0);
 }
 
 void CAnimal::Update(float DeltaTime) {
-    this->motion_timer += DeltaTime;
-    if (this->motion_timer > 0.2f) this->motion_index++, this->motion_timer = 0.0f;
-    if (this->motion_index >= this->motion.size()) this->motion_index = 0;
-    move_by_vector(this->speed, 0);
-}
-
-bool CAnimal::move_by_vector(float x, float y) {
-    this->x += x;
-    this->y += y;
-    Bounding_box = { this->x, this->y, this->x + AnimalWidth, this->y + AnimalHeight };
+    // this->motion_timer += DeltaTime;
+    // if (this->motion_timer > 0.2f) this->motion_index++, this->motion_timer = 0.0f;
+    // if (this->motion_index >= this->motion.size()) this->motion_index = 0;
+    this->x += DeltaTime * this->speed;
 }
 
 void CAnimal::Draw() {
     //DrawTexturePro(motion[motion_index], { 0, 0, AnimalWidth, AnimalWidth }, { x, y, AnimalWidth, AnimalHeight }, { 0, 0 }, 0, WHITE);
-    DrawRectangleRec(Bounding_box, RED);
+    //DrawRectangleRec({ this->x, this->y, AnimalWidth, AnimalHeight }, RED);
+    DrawRectangleLines(x, y, AnimalWidth, AnimalHeight, BLUE);
+}
+
+Rectangle CAnimal::getBoundingBox() {
+    return { x, y, AnimalWidth, AnimalHeight };
 }
 
 CAnimal::~CAnimal() {
@@ -34,4 +32,5 @@ CAnimal::~CAnimal() {
         motion.pop_back();
     }
 }
+
 

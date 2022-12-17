@@ -24,22 +24,27 @@ int main()
 
     // Init player position
     CGame *game = new CGame();
+    // cerr << "Test game constructor" << endl;
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-        // cerr << "Game loop" << endl;
         float GFT = GetFrameTime(); 
         game->Update(GFT);
+        // cerr << "Test game update" << endl;
+
         if (game->Collision()) {
-            cerr << "Collision" << endl;
+            // cerr << "Collision" << endl;
             delete game;
             game = nullptr;
             break;
         }
 
+        // cerr << "Test game collision" << endl;
+
         BeginDrawing();
             ClearBackground(GRAY);
             game->Draw();
+            // cerr << "Test game draw" << endl;
             DrawFPS(0, 0);
         EndDrawing();
         

@@ -18,7 +18,9 @@ bool CGame::Collision() {
 
 void CGame::Update(float GFT) {
     player->Update(GFT);
+    // cerr << "Test player update" << endl;
     map->Update(GFT);
+    // cerr << "Test map update" << endl;
 }
 
 void CGame::Draw() {
