@@ -4,19 +4,23 @@
 #include "../Helper/Const.h"
 #include "../Helper/TextureHepler.h"
 #include "CObject.h"
+#include "CVehicle.h"
+#include "CAnimal.h"
+#include "CLine.h"
 
 #include <algorithm>
 #include <math.h>
 #include <string>
 #include <vector>
+#include <iostream>
 
-class CVehicle: public CObject {
+class CMap {
     private:
-
+        std::vector <CLine *> Lines;
     public:
-        CVehicle(float y, float speed, bool FromLeftToRight); 
+        CMap();
+        bool Collision(Rectangle Player);
         void Update(float DeltaTime);
         void Draw();
-        Rectangle getBoundingBox();
-        ~CVehicle();
+        ~CMap();
 };

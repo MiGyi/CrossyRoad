@@ -7,6 +7,7 @@ INCLUDES  := -I ../include/
 SRC      :=                      \
    $(wildcard ../src/*.cpp)         \
    $(wildcard ../src/COBJECT/*.cpp) \
+   $(wildcard ../src/Helper/*.cpp) \
 
 default:
 	$(CXX) $(CXXFLAGS) $(SRC) -o $(TARGET) $(OBJ) $(INCLUDES) $(LDFLAGS)
