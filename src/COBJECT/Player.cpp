@@ -1,6 +1,8 @@
-#include "CPeople.h"
+#include "Player.h"
 
-CPeople::CPeople()
+using namespace std;
+
+Player::Player()
 {
     x = (screenWidth - PeopleWidth) / 2;
     y = screenHeight - PeopleHeight;
@@ -15,46 +17,40 @@ CPeople::CPeople()
     Bounding_box = { this->x, this->y, this->x + PeopleWidth, this->y + PeopleHeight };
 }
 
-void CPeople::Update(float DeltaTime) {
-    motion_timer += DeltaTime;
-    if (motion_timer > 0.2f) motion_index++, motion_timer = 0.0f;
-    if (motion_index >= motion.size()) motion_index = 0;
+bool Player::Update(float DeltaTime) {
 
-    float x = 0, y = 0;
+    motion_timer += DeltaTime; cerr << "Test player update 0skdhfak1" << endl;
+    if (motion_timer > 0.2f) motion_index++, motion_timer = 0.0f; 
+    if (motion_index >= motion.size()) motion_index = 0; 
+
     if (IsKeyDown(KEY_RIGHT)) x += DeltaTime * 300.0f;
     if (IsKeyDown(KEY_LEFT)) x -= DeltaTime * 300.0f;
     if (IsKeyDown(KEY_UP)) y -= DeltaTime * 300.0f;
     if (IsKeyDown(KEY_DOWN)) y += DeltaTime * 300.0f;
 
-    move_by_vector(x, y);
-    Bounding_box = { this->x, this->y, this->x + PeopleWidth, this->y + PeopleHeight };
-}
 
-bool CPeople::move_by_vector(float x, float y)
-{
-    this->x += x;
-    this->y += y;
-    return FixPosition();
-}
+    bool isOutOfMap = 0;
 
-bool CPeople::FixPosition() {
     if (x < 0) x = 0;
     if (x > screenWidth - PeopleWidth) x = screenWidth - PeopleWidth;
     if (y > screenHeight - PeopleHeight) y = screenHeight - PeopleHeight;
-    if (y < -50) { y = screenHeight - 50; return 1; } //out of screen
-    return 0;
+    if (y < -50) y = screenHeight - 50, isOutOfMap = 1; //out of screen
+
+    Bounding_box = { this->x, this->y, this->x + PeopleWidth, this->y + PeopleHeight };
+
+    return isOutOfMap;
 }
 
-Rectangle CPeople::getBoundingBox() {
+Rectangle Player::getBoundingBox() {
     return { x - 20, y - 20, PeopleWidth + 40, PeopleHeight + 20};
 }
 
-void CPeople::Draw() {
-    DrawTexturePro(motion[motion_index], { 0, 0, PeopleWidth, PeopleWidth }, { x - 20, y - 20, PeopleWidth + 40, PeopleHeight + 20}, { 0, 0 }, 0, WHITE);
+void Player::Draw() {
+    DrawTexturePro(motion[motion_index], { 0, 0, PeopleWidth, PeopleHeight }, { x - 20, y - 20, PeopleWidth + 40, PeopleHeight + 20}, { 0, 0 }, 0, WHITE);
     DrawRectangleLines(x, y, PeopleWidth, PeopleHeight, RED);
 }
 
-CPeople::~CPeople() {
+Player::~Player() {
     while (!motion.empty()) {
         UnloadTexture(motion.back());
         motion.pop_back();

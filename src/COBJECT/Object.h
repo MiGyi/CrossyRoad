@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-class CObject {
+class Object {
     protected:
         float x, y;
         std::vector <Texture2D> motion;
@@ -21,7 +21,7 @@ class CObject {
         virtual void Update(float DeltaTime) = 0;
         Rectangle GetBoundingBox() { return Bounding_box; }
         virtual void Draw() = 0;
-        virtual ~CObject() {}
+        virtual ~Object() {}
         float GetX() { return x; }
         virtual Rectangle getBoundingBox() = 0;
         bool Collision(Rectangle Player) {

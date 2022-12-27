@@ -9,7 +9,9 @@
 #include <string>
 #include <vector>
 
-class CPeople {
+#include <iostream>
+
+class Player {
     private:
         float x, y;
         bool isAlive;
@@ -18,11 +20,9 @@ class CPeople {
         int motion_index = 0;
         Rectangle Bounding_box;
     public:
-        CPeople();
-        void Update(float DeltaTime);
-        bool move_by_vector(float x, float y);
-        bool FixPosition();
+        Player();
+        bool Update(float DeltaTime);
         Rectangle getBoundingBox();
         void Draw();
-        ~CPeople();
+        ~Player();
 };  

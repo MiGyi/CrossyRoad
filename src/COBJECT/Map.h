@@ -3,26 +3,26 @@
 #include "raylib.h"
 #include "../Helper/Const.h"
 #include "../Helper/TextureHepler.h"
-#include "CObject.h"
-#include "CVehicle.h"
-#include "CAnimal.h"
-#include "CLine.h"
-#include "CRoad.h"
-#include "CForest.h"
+#include "Object.h"
+#include "Vehicle.h"
+#include "Animal.h"
+#include "Line.h"
+#include "Road.h"
+#include "Forest.h"
 
-#include <algorithm>
 #include <math.h>
 #include <string>
 #include <vector>
 #include <iostream>
 
-class CMap {
+class Map {
     private:
-        std::vector <CLine *> Lines;
+        std::vector <Line *> Lines;
     public:
-        CMap();
+        Map();
+        Map(float Speed, int NumOfLines, int NumOfVehicles, int NumOfAnimals);
         bool Collision(Rectangle Player);
         void Update(float DeltaTime);
         void Draw();
-        ~CMap();
+        ~Map();
 };

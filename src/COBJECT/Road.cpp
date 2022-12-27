@@ -1,23 +1,23 @@
-#include "CForest.h"
+#include "Road.h"
 
 using namespace std;
 
-CForest::CForest(float y, bool isSafe, float speed, int MaxObject) {
+Road::Road(float y, bool isSafe, float speed, int MaxObject) {
     this->y = y;
     this->speed = speed;
     this->isSafe = isSafe;
     this->MaxObject = isSafe ? 0 : MaxObject;
 }
 
-void CForest::GenerateObject() {
+void Road::GenerateObject() {
     if (Objects.size() >= MaxObject) return;
     if (speed > 0 && !Objects.empty() && Objects.back()->GetX() < 100) return;
     if (speed < 0 && !Objects.empty() && Objects.back()->GetX() > screenWidth - 200) return;
-    int getRand = GetRandomValue(0, 100); 
-    if (getRand == 6) Objects.push_back(new CAnimal(y, speed, speed > 0));
+    int getRand = GetRandomValue(1, 150); 
+    if (getRand == 6) Objects.push_back(new Vehicle(y, speed, speed > 0));
 };
 
-CForest::~CForest() {
+Road::~Road() {
     while (!Objects.empty()) {
         delete Objects.back();
         Objects.pop_back();

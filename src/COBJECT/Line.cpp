@@ -1,13 +1,13 @@
-#include "CLine.h"
+#include "Line.h"
 
 using namespace std;
 
-void CLine::Update(float DeltaTime) {
-    cerr << "Check upd line 1" << endl;
+void Line::Update(float DeltaTime) {
 
     if (isSafe) return;
 
     if (Objects.size() > 0) {
+        
         if (this->speed > 0 && Objects.back()->GetX() > screenWidth) {
             delete Objects.front();
             Objects.erase(Objects.begin());
@@ -27,7 +27,7 @@ void CLine::Update(float DeltaTime) {
     }
 }
 
-void CLine::Draw() {
+void Line::Draw() {
     DrawRectangleLines(0, y, screenWidth, LineHeight, GREEN);
     //DrawRectangleRec({ 0, y, screenWidth, LineHeight }, GREEN);
     for (auto &i : Objects) {
@@ -35,7 +35,7 @@ void CLine::Draw() {
     }
 }
 
-bool CLine::Collision(Rectangle Player) {
+bool Line::Collision(Rectangle Player) {
     if (isSafe) return false;
     for (auto &i : Objects) {
         if (CheckCollisionRecs(Player, i->getBoundingBox())) return true;

@@ -4,12 +4,12 @@
 using namespace std;
 
 #include "Helper/Const.h"
-#include "COBJECT/CPeople.h"
-#include "COBJECT/CLine.h"
-#include "COBJECT/CVehicle.h"
-#include "COBJECT/CAnimal.h"
-#include "COBJECT/CMap.h"
-#include "COBJECT/CGame.h"
+#include "COBJECT/Player.h"
+#include "COBJECT/Line.h"
+#include "COBJECT/Vehicle.h"
+#include "COBJECT/Animal.h"
+#include "COBJECT/Map.h"
+#include "COBJECT/Game.h"
 
 int main() 
 {
@@ -23,14 +23,14 @@ int main()
     //--------------------------------------------------------------------------------------
 
     // Init player position
-    CGame *game = new CGame();
+    Game *game = new Game();
     // cerr << "Test game constructor" << endl;
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
         float GFT = GetFrameTime(); 
         game->Update(GFT);
-        // cerr << "Test game update" << endl;
+        cerr << "Test game update main" << endl;
 
         if (game->Collision()) {
             // cerr << "Collision" << endl;

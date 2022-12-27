@@ -3,9 +3,9 @@
 #include "raylib.h"
 #include "../Helper/Const.h"
 #include "../Helper/TextureHepler.h"
-#include "CObject.h"
-#include "CVehicle.h"
-#include "CAnimal.h"
+#include "Object.h"
+#include "Vehicle.h"
+#include "Animal.h"
 
 
 #include <algorithm>
@@ -14,11 +14,11 @@
 #include <vector>
 #include <iostream>
 
-class CLine {
+class Line {
     protected:
         float x, y;
         float speed;
-        std::vector <CObject *> Objects;
+        std::vector <Object *> Objects;
         bool isSafe = false;
         int MaxObject;
 

@@ -3,20 +3,20 @@
 #include "raylib.h"
 #include "../Helper/Const.h"
 #include "../Helper/TextureHepler.h"
-#include "CObject.h"
+#include "Object.h"
 
 #include <algorithm>
 #include <math.h>
 #include <string>
 #include <vector>
 
-class CVehicle: public CObject {
+class Vehicle: public Object {
     private:
 
     public:
-        CVehicle(float y, float speed, bool FromLeftToRight); 
+        Vehicle(float y, float speed, bool FromLeftToRight); 
         void Update(float DeltaTime);
         void Draw();
         Rectangle getBoundingBox();
-        ~CVehicle();
+        ~Vehicle();
 };

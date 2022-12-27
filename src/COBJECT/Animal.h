@@ -3,7 +3,7 @@
 #include "raylib.h"
 #include "../Helper/Const.h"
 #include "../Helper/TextureHepler.h"
-#include "CObject.h"
+#include "Object.h"
 
 #include <algorithm>
 #include <math.h>
@@ -12,13 +12,13 @@
 
 
 
-class CAnimal: public CObject {
+class Animal: public Object {
     private:
         
     public:
-        CAnimal(float y, float speed, bool FromLeftToRight); 
+        Animal(float y, float speed, bool FromLeftToRight); 
         void Update(float DeltaTime);
         void Draw();
         Rectangle getBoundingBox();
-        ~CAnimal();
+        ~Animal();
 };
