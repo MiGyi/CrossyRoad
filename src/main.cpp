@@ -10,6 +10,7 @@ using namespace std;
 #include "COBJECT/Animal.h"
 #include "COBJECT/Map.h"
 #include "COBJECT/Game.h"
+#include "COBJECT/TextureHolder.h"
 
 int main() 
 {
@@ -21,16 +22,15 @@ int main()
     //--------------------------------------------------------------------------------------
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
-
-    // Init player position
-    Game *game = new Game();
+    // Init texture holder
+    TextureHolder *textureHolder = new TextureHolder();
+    Game *game = new Game(textureHolder);
     // cerr << "Test game constructor" << endl;
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
         float GFT = GetFrameTime(); 
         game->Update(GFT);
-        cerr << "Test game update main" << endl;
 
         if (game->Collision()) {
             // cerr << "Collision" << endl;
@@ -53,6 +53,7 @@ int main()
     
     // De-Initialization
     if (game) delete game;
+    delete textureHolder;
     //--------------------------------------------------------------------------------------
     CloseWindow();                  // Close window and OpenGL context
     //--------------------------------------------------------------------------------------

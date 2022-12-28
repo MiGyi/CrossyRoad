@@ -2,7 +2,8 @@
 
 #include "raylib.h"
 #include "../Helper/Const.h"
-#include "../Helper/TextureHepler.h"
+#include "../Helper/TextureHelper.h"
+#include "TextureHolder.h"
 
 #include <algorithm>
 #include <math.h>
@@ -15,12 +16,13 @@ class Player {
     private:
         float x, y;
         bool isAlive;
-        std::vector <Texture2D> motion;
+        std::vector <Texture2D *> Textures;
         float motion_timer = 0.0f;
         int motion_index = 0;
         Rectangle Bounding_box;
     public:
         Player();
+        Player(TextureHolder *TextureHD, int Character);
         bool Update(float DeltaTime);
         Rectangle getBoundingBox();
         void Draw();

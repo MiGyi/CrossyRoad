@@ -18,3 +18,5 @@ const int AnimalHeight = 100;
 
 const int NumberOfLine = 9;
 const int LineHeight = screenHeight / NumberOfLine; //1 map = 9 lines
+
+const int NumberOfCharacter = 1;

@@ -4,6 +4,7 @@
 #include "Object.h"
 #include "Map.h"
 #include "Player.h"
+#include "TextureHolder.h"
 
 #include <iostream>
 #include <vector>
@@ -17,6 +18,7 @@ class Game {
 
     public:
         Game();
+        Game(TextureHolder *textureHolder);
         ~Game();
         bool Collision();
         void Update(float GFT);

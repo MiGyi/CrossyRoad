@@ -2,7 +2,7 @@
 
 #include "raylib.h"
 #include "../Helper/Const.h"
-#include "../Helper/TextureHepler.h"
+#include "../Helper/TextureHelper.h"
 #include "Object.h"
 #include "Vehicle.h"
 #include "Animal.h"

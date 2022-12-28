@@ -7,27 +7,33 @@ Player::Player()
     x = (screenWidth - PeopleWidth) / 2;
     y = screenHeight - PeopleHeight;
     isAlive = true;
-    std::string filepath1 = "../resources/Pictures/Char_mo1.png";
-    std::string filepath2 = "../resources/Pictures/Char_mo2.png";
-    Texture2D temp;
-    GetTexture(PeopleWidth, PeopleHeight, filepath1, temp);
-    motion.push_back(temp);
-    GetTexture(PeopleWidth, PeopleHeight, filepath2, temp);
-    motion.push_back(temp);
+    
+    Bounding_box = { this->x, this->y, this->x + PeopleWidth, this->y + PeopleHeight };
+}
+
+Player::Player(TextureHolder *TextureHD, int Character)
+{
+    x = (screenWidth - PeopleWidth) / 2;
+    y = screenHeight - PeopleHeight;
+    isAlive = true;
+    Textures = TextureHD->GetCharacter(Character);
     Bounding_box = { this->x, this->y, this->x + PeopleWidth, this->y + PeopleHeight };
 }
 
 bool Player::Update(float DeltaTime) {
+    
+    int motion_direction = -1;
+    if (IsKeyDown(KEY_RIGHT)) x += DeltaTime * 300.0f, motion_direction = 2;
+    else if (IsKeyDown(KEY_LEFT)) x -= DeltaTime * 300.0f, motion_direction = 1;
+    else if (IsKeyDown(KEY_UP)) y -= DeltaTime * 300.0f, motion_direction = 3;
+    else if (IsKeyDown(KEY_DOWN)) y += DeltaTime * 300.0f, motion_direction = 0;
 
-    motion_timer += DeltaTime; cerr << "Test player update 0skdhfak1" << endl;
-    if (motion_timer > 0.2f) motion_index++, motion_timer = 0.0f; 
-    if (motion_index >= motion.size()) motion_index = 0; 
-
-    if (IsKeyDown(KEY_RIGHT)) x += DeltaTime * 300.0f;
-    if (IsKeyDown(KEY_LEFT)) x -= DeltaTime * 300.0f;
-    if (IsKeyDown(KEY_UP)) y -= DeltaTime * 300.0f;
-    if (IsKeyDown(KEY_DOWN)) y += DeltaTime * 300.0f;
-
+    if (motion_direction != -1) {
+        motion_timer += DeltaTime;
+        if (motion_timer > 0.2f) motion_index++, motion_timer = 0.0f; 
+        if (motion_index / 4 != (motion_index - 1) / 4) motion_index -= 4; 
+        if (motion_index / 4 != motion_direction) motion_index = motion_direction * 4; //change motion direction (0: down, 1: left, 2: right, 3: up)
+    }
 
     bool isOutOfMap = 0;
 
@@ -46,13 +52,10 @@ Rectangle Player::getBoundingBox() {
 }
 
 void Player::Draw() {
-    DrawTexturePro(motion[motion_index], { 0, 0, PeopleWidth, PeopleHeight }, { x - 20, y - 20, PeopleWidth + 40, PeopleHeight + 20}, { 0, 0 }, 0, WHITE);
+    DrawTexturePro(*Textures[motion_index], { 0, 0, PeopleWidth, PeopleHeight }, { x - 20, y - 20, PeopleWidth + 40, PeopleHeight + 20}, { 0, 0 }, 0, WHITE);
     DrawRectangleLines(x, y, PeopleWidth, PeopleHeight, RED);
 }
 
 Player::~Player() {
-    while (!motion.empty()) {
-        UnloadTexture(motion.back());
-        motion.pop_back();
-    }
+    Textures.clear();
 }
