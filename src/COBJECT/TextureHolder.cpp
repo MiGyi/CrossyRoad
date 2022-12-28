@@ -4,6 +4,7 @@ using namespace std;
 
 TextureHolder::TextureHolder() {
     string character_textures_filepath = "../resources/Pictures/Character/";
+    string traffic_light_textures_filepath = "../resources/Pictures/Traffic_light/";
     for (int i = 0; i < NumberOfCharacter; i++) {
         string char_i_filepath = character_textures_filepath + char(i + '0') + "/";
         for (int j = 1; j <= 9; j++) {
@@ -16,6 +17,13 @@ TextureHolder::TextureHolder() {
             GetTexture(PeopleWidth, PeopleHeight, char_i_filepath + "image_part_01" + char(j + '0') + ".png", *texture);
             Character[i].push_back(texture);
         }
+    }
+
+    for (int i = 0; i < NumberOfTrafficLight; i++) {
+        string traf_i_filepath = "../resources/Pictures/Traffic_light/" + to_string(i) + ".png";
+        Texture2D *texture = new Texture2D();
+        GetTexture(TrafficLightWidth, TrafficLightHeight, traf_i_filepath, *texture);
+        Traffic_light.push_back(texture);
     }
 }
 
@@ -47,10 +55,20 @@ void TextureHolder::Clear() {
         }
         Animal[i].clear();
     }
+
+    for (int i = 0; i < 3; i++) {
+        UnloadTexture(*Traffic_light[i]);
+        delete Traffic_light[i];
+        Traffic_light.clear();
+    }
 }
 
 vector <Texture2D *> TextureHolder::GetCharacter(int Character) {
     return this->Character[Character];
+}
+
+vector <Texture2D *> TextureHolder::GetTrafficLight(int TrafficLight) {
+    return this->Traffic_light;
 }
 
 void TextureHolder::LoadTexture(const string& filepath, const string& name) {
