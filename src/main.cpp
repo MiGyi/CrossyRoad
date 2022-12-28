@@ -29,24 +29,12 @@ int main()
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-        float GFT = GetFrameTime(); 
-        game->Update(GFT);
-
-        if (game->Collision()) {
-            // cerr << "Collision" << endl;
+        if (!game->loop()) {
             delete game;
             game = nullptr;
+
             break;
         }
-
-        // cerr << "Test game collision" << endl;
-
-        BeginDrawing();
-            ClearBackground(GRAY);
-            game->Draw();
-            // cerr << "Test game draw" << endl;
-            DrawFPS(0, 0);
-        EndDrawing();
         
     }
 

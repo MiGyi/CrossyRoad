@@ -3,38 +3,37 @@
 using namespace std;
 
 Game::Game() { //default constructor for testing purpose
-    player = new Player();
-    map = new Map(this->speed, 9, 6, 6);
+    room = new Room();
 }
 
-Game::Game(TextureHolder *textureHolder) {
-    int Character = 0;
-    // Choose character function
-    player = new Player(textureHolder, Character);
-    map = new Map(this->speed, 9, 6, 6);
+Game::Game(TextureHolder *textureHolder) { //default constructor for testing purpose
+    room = new Room(textureHolder);
 }
 
 Game::~Game() {
-    delete player;
-    delete map;
+    delete room;
 }
 
-bool Game::Collision() {
-    return map->Collision(player->getBoundingBox());
-}
+bool Game::loop() {
+    float GFT = GetFrameTime(); 
+    room->Update(GFT);
 
-void Game::Update(float GFT) {
-    bool isOut = player->Update(GFT);
-    if (isOut) { //Player is out of map
-        delete map;
-        this->speed += 50.0f;
-        map = new Map(this->speed, 9, 6, 6); // Create new map with higher speed
+    if (room->Collision()) {
+        // cerr << "Collision" << endl;
+        delete room;
+        room = nullptr;
+        return false;
     }
-    map->Update(GFT);
-}
 
-void Game::Draw() {
-    map->Draw();
-    player->Draw();
+    // cerr << "Test game collision" << endl;
+
+    BeginDrawing();
+        ClearBackground(GRAY);
+        room->Draw();
+        // cerr << "Test game draw" << endl;
+        DrawFPS(0, 0);
+    EndDrawing();
+
+    return true;
 }
 

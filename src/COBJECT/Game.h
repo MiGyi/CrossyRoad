@@ -5,22 +5,29 @@
 #include "Map.h"
 #include "Player.h"
 #include "TextureHolder.h"
+#include "Room.h"
 
 #include <iostream>
 #include <vector>
 
+enum class GameState {
+    Running,
+    Paused,
+    GameOver
+};
+
 class Game {
     private:
-        Player *player = nullptr;
-        Map *map = nullptr;
+        Room *room = nullptr;
         int score = 0;
-        float speed = 100.0f;
+        GameState state;
 
     public:
         Game();
         Game(TextureHolder *textureHolder);
         ~Game();
-        bool Collision();
-        void Update(float GFT);
-        void Draw();
+        bool loop();
+
+        void saveGame();
+        void loadGame();
 };
