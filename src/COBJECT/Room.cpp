@@ -11,7 +11,7 @@ Room::Room(TextureHolder *textureHolder) {
     int Character = 0;
     // Choose character function
     player = new Player(textureHolder, Character);
-    map = new Map(this->speed, 9, 6, 6);
+    map = new Map(textureHolder, this->speed, 9, 6, 6);
 }
 
 Room::~Room() {
@@ -26,9 +26,8 @@ bool Room::Collision() {
 void Room::Update(float GFT) {
     bool isOut = player->Update(GFT);
     if (isOut) { //Player is out of map
-        delete map;
         this->speed += 50.0f;
-        map = new Map(this->speed, 9, 6, 6); // Create new map with higher speed
+        map->RegenMap(this->speed, 9, 6, 6);
     }
     map->Update(GFT);
 }

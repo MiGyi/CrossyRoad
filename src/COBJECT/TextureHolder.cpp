@@ -25,6 +25,17 @@ TextureHolder::TextureHolder() {
         GetTexture(TrafficLightWidth, TrafficLightHeight, traf_i_filepath, *texture);
         Traffic_light.push_back(texture);
     }
+
+    // Load Forest Texture
+    string forest_textures_filepath = "../resources/Pictures/Lane/Forest/";
+    for (int i = 1; i <= 3; i++) {
+        Texture2D *texture = new Texture2D();
+        GetTexture(LaneWidth, LaneHeight, forest_textures_filepath + char(i + '0') + ".png", *texture);
+        Forest.push_back(texture);
+    }
+
+    // Load Road Texture
+    
 }
 
 TextureHolder::~TextureHolder() {
@@ -61,13 +72,33 @@ void TextureHolder::Clear() {
         delete Traffic_light[i];
         Traffic_light.clear();
     }
+
+    for (int i = 0; i < Forest.size(); i++) {
+        UnloadTexture(*Forest[i]);
+        delete Forest[i];
+    }
+    Forest.clear();
+
+    for (int i = 0; i < Road.size(); i++) {
+        UnloadTexture(*Road[i]);
+        delete Road[i];
+    }
+    Road.clear();
 }
 
 vector <Texture2D *> TextureHolder::GetCharacter(int Character) {
     return this->Character[Character];
 }
 
-vector <Texture2D *> TextureHolder::GetTrafficLight(int TrafficLight) {
+vector <Texture2D *> TextureHolder::GetForestTextures() {
+    return this->Forest;
+}
+
+vector <Texture2D *> TextureHolder::GetRoadTextures() {
+    return this->Road;
+}
+
+vector <Texture2D *> TextureHolder::GetTrafficLight() {
     return this->Traffic_light;
 }
 

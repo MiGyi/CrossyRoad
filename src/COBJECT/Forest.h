@@ -4,6 +4,7 @@
 class Forest: public Line {
     public:
         Forest(float y, bool isSafe, float speed, int MaxObject);
+        Forest(Texture2D *texture, float y, bool isSafe, float speed, int MaxObject);
         void GenerateObject();
         ~Forest();
 };

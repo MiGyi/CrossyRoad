@@ -18,8 +18,6 @@ void Road::GenerateObject() {
 };
 
 Road::~Road() {
-    while (!Objects.empty()) {
-        delete Objects.back();
-        Objects.pop_back();
-    }
+    ClearObject();
+    texture = nullptr;
 }

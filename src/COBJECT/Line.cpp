@@ -28,7 +28,8 @@ void Line::Update(float DeltaTime) {
 }
 
 void Line::Draw() {
-    DrawRectangleLines(0, y, screenWidth, LineHeight, GREEN);
+    if (!texture) DrawRectangleLines(0, y, screenWidth, LaneHeight, GREEN);
+    else DrawTexturePro(*texture, { 0, y, LaneWidth, LaneHeight }, {0, y, LaneWidth, LaneHeight}, { 0, 0 }, 0, WHITE);
     //DrawRectangleRec({ 0, y, screenWidth, LineHeight }, GREEN);
     for (auto &i : Objects) {
         i->Draw();
@@ -41,4 +42,11 @@ bool Line::Collision(Rectangle Player) {
         if (CheckCollisionRecs(Player, i->getBoundingBox())) return true;
     }
     return false;
+}
+
+void Line::ClearObject() {
+    while (!Objects.empty()) {
+        delete Objects.back();
+        Objects.pop_back();
+    }
 }

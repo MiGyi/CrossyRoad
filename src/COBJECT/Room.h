@@ -11,8 +11,8 @@
 
 class Room{
 private:
-    Player *player;
-    Map *map;
+    Player *player = nullptr;
+    Map *map = nullptr;
     float speed = 100.0f;
 
 public:

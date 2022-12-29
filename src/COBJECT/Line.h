@@ -16,6 +16,7 @@
 
 class Line {
     protected:
+        Texture2D *texture = nullptr;
         float x, y;
         float speed;
         std::vector <Object *> Objects;
@@ -27,5 +28,6 @@ class Line {
         void Draw();
         virtual void GenerateObject() = 0;
         bool Collision(Rectangle Player);
+        void ClearObject();
 };
 

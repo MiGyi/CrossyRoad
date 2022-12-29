@@ -14,7 +14,7 @@ Map::Map() { // Default constructor for testing, will be removed later, default 
         getRand += getRand;
         if (getRandType) Lines.push_back(new Road(y, RandLineSafety[i], 50.0f * (getRand - 1.0f), 5));
             else Lines.push_back(new Forest(y, RandLineSafety[i], 50.0f * (getRand - 1.0f), 5));
-        y += LineHeight;
+        y += LaneHeight;
     }
     Lines.push_back(new Forest(y, true, 0, 0)); // first line is always safe
 }
@@ -38,6 +38,31 @@ Map::Map(float Speed, int NumOfLines, int NumOfVehicles, int NumOfAnimals) {
     Lines.push_back(new Forest(y, true, 0, 0)); // first line is always safe
 }
 
+Map::Map(TextureHolder *textureHD, float speed, int NumOfLanes, int NumOfVehicles, int NumOfAnimals) {
+    LaneTexture[0] = textureHD->GetForestTextures();
+    LaneTexture[1] = textureHD->GetRoadTextures();
+    RegenMap(speed, NumOfLanes, NumOfVehicles, NumOfAnimals);
+}
+
+void Map::GenLane() {
+    float y = 0;
+    int NumOfSafeLine = NumOfLanes / 3 * 2 - 1; // 2/3 of lines are safe, first line is always safe
+    int *RandLineSafety = new int [NumOfLanes - 1]; // 1: safe, 0: unsafe
+    for (int i = 0; i < NumOfLanes; i++) RandLineSafety[i] = 1;
+    for (int i = 0; i < NumOfSafeLine; i++) RandLineSafety[i] = 0;
+    shuffle(RandLineSafety, RandLineSafety + NumOfLanes - 1, default_random_engine(time(NULL)));
+    for (int i = 0; i < NumOfLanes - 1; i++) {
+        int getRand = GetRandomValue(0, 1); // 0: Vehicle from right to left, 1: Vehicle from left to right
+        int getRandType = GetRandomValue(0, 1); //0: Forest, 1: Road
+        getRand += getRand;
+        if (getRandType) Lines.push_back(new Road(y, RandLineSafety[i], speed * (getRand - 1.0f), NumOfVehicles)); // TODO: add texture constructor for Road
+            else Lines.push_back(new Forest(LaneTexture[getRandType][GetRandomValue(0, 2)], y, RandLineSafety[i], speed * (getRand - 1.0f), NumOfAnimals));
+        y += (screenHeight * 1.0f) / (NumOfLanes * 1.0f);
+    }
+    delete [] RandLineSafety;
+    Lines.push_back(new Forest(LaneTexture[0][GetRandomValue(0, 2)], y, true, 0, 0)); // first line is always safe
+}
+
 bool Map::Collision(Rectangle Player) {
     for (auto &i : Lines) {
         if (i->Collision(Player)) return true;
@@ -59,9 +84,27 @@ void Map::Draw() {
     }
 }
 
+void Map::RegenMap(float Speed, int NumOfLines, int NumOfVehicles, int NumOfAnimals) {
+    this->speed = Speed;
+    this->NumOfLanes = NumOfLines;
+    this->NumOfVehicles = NumOfVehicles;
+    this->NumOfAnimals = NumOfAnimals;
+
+    for (int i = 0; i < Lines.size(); i++) {
+        Lines[i]->ClearObject();
+    }
+    while (!Lines.empty()) {
+        delete Lines.back();
+        Lines.pop_back();
+    }
+    this->GenLane();
+}
+
 Map::~Map() {
     while (!Lines.empty()) {
         delete Lines.back();
         Lines.pop_back();
     }
+    LaneTexture[0].clear();
+    LaneTexture[1].clear();
 }

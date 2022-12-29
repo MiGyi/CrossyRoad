@@ -28,9 +28,6 @@ Rectangle Vehicle::getBoundingBox() {
 }
 
 Vehicle::~Vehicle() {
-    while (!motion.empty()) {
-        UnloadTexture(motion.back());
-        motion.pop_back();
-    }
+    motion.clear();
 }
 

@@ -12,7 +12,7 @@
 class Object {
     protected:
         float x, y;
-        std::vector <Texture2D> motion;
+        std::vector <Texture2D *> motion;
         float motion_timer = 0.0f;
         int motion_index = 0;
         Rectangle Bounding_box;

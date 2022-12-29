@@ -9,6 +9,14 @@ Forest::Forest(float y, bool isSafe, float speed, int MaxObject) {
     this->MaxObject = isSafe ? 0 : MaxObject;
 }
 
+Forest::Forest(Texture2D *texture, float y, bool isSafe, float speed, int MaxObject) {
+    this->texture = texture;
+    this->y = y;
+    this->speed = speed;
+    this->isSafe = isSafe;
+    this->MaxObject = isSafe ? 0 : MaxObject;
+}
+
 void Forest::GenerateObject() {
     if (Objects.size() >= MaxObject) return;
     if (speed > 0 && !Objects.empty() && Objects.back()->GetX() < 100) return;
@@ -18,8 +26,6 @@ void Forest::GenerateObject() {
 };
 
 Forest::~Forest() {
-    while (!Objects.empty()) {
-        delete Objects.back();
-        Objects.pop_back();
-    }
+    ClearObject();
+    texture = nullptr;
 }
