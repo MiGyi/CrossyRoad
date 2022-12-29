@@ -13,22 +13,22 @@
 
 enum class TrafficLightState {
     Green,
-    Red,
-    Yellow
+    Yellow,
+    Red
 };
 
 class TrafficLight: public Object {
     private:
-        const int timeToChange[3] = { 5, 3, 2 };
+        const int timeToChange[3] = { 5, 1, 3 };
         TrafficLightState state = TrafficLightState::Green;
-        float time = 0;
-
+        int curTime = 0;
         int timeCounter = 0;
     public:
-        TrafficLight(TextureHolder *TextureHD, float y); 
+        TrafficLight(float y); 
         void Update(float DeltaTime);
         void UpdateTexture();
         void Draw();
         Rectangle getBoundingBox();
+        TrafficLightState GetState();
         ~TrafficLight();
 };

@@ -15,6 +15,7 @@ void Road::GenerateObject() {
     if (speed < 0 && !Objects.empty() && Objects.back()->GetX() > screenWidth - 200) return;
     int getRand = GetRandomValue(1, 150); 
     if (getRand == 6) Objects.push_back(new Vehicle(y, speed, speed > 0));
+    Objects.push_back(new TrafficLight(y));
 };
 
 Road::~Road() {
