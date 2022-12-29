@@ -25,7 +25,7 @@ class Line {
 
     public: 
         void Update(float DeltaTime);
-        void Draw();
+        virtual void Draw();
         virtual void GenerateObject() = 0;
         bool Collision(Rectangle Player);
         void ClearObject();

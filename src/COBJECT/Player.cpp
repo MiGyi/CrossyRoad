@@ -26,7 +26,7 @@ Player::Player(int Character)
     y = screenHeight - PeopleHeight;
     isAlive = true;
     Textures = TextureHolder::GetCharacter(Character);
-    Bounding_box = { this->x + 10, this->y, PeopleWidth - 20, PeopleHeight};
+    Bounding_box = { this->x + 10, this->y, PeopleWidth - 10, PeopleHeight};
 }
 
 bool Player::Update(float DeltaTime) {
@@ -51,7 +51,7 @@ bool Player::Update(float DeltaTime) {
     if (y > screenHeight - PeopleHeight) y = screenHeight - PeopleHeight;
     if (y < -50) y = screenHeight - 50, isOutOfMap = 1; //out of screen
 
-    Bounding_box = { this->x + 10, this->y, PeopleWidth - 20, PeopleHeight};
+    Bounding_box = { this->x + 10, this->y, PeopleWidth - 10, PeopleHeight};
 
     return isOutOfMap;
 }
