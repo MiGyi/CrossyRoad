@@ -8,7 +8,7 @@ Player::Player()
     y = screenHeight - PeopleHeight;
     isAlive = true;
     
-    Bounding_box = { this->x, this->y, this->x + PeopleWidth, this->y + PeopleHeight };
+    Bounding_box = { this->x, this->y, PeopleWidth, PeopleHeight };
 }
 
 Player::Player(TextureHolder *TextureHD, int Character)
@@ -17,7 +17,7 @@ Player::Player(TextureHolder *TextureHD, int Character)
     y = screenHeight - PeopleHeight;
     isAlive = true;
     Textures = TextureHD->GetCharacter(Character);
-    Bounding_box = { this->x, this->y, this->x + PeopleWidth, this->y + PeopleHeight };
+    Bounding_box = { this->x + 10, this->y, PeopleWidth - 20, PeopleHeight};
 }
 
 bool Player::Update(float DeltaTime) {
@@ -42,18 +42,18 @@ bool Player::Update(float DeltaTime) {
     if (y > screenHeight - PeopleHeight) y = screenHeight - PeopleHeight;
     if (y < -50) y = screenHeight - 50, isOutOfMap = 1; //out of screen
 
-    Bounding_box = { this->x, this->y, this->x + PeopleWidth, this->y + PeopleHeight };
+    Bounding_box = { this->x + 10, this->y, PeopleWidth - 20, PeopleHeight};
 
     return isOutOfMap;
 }
 
 Rectangle Player::getBoundingBox() {
-    return { x - 20, y - 20, PeopleWidth + 40, PeopleHeight + 20};
+    return Bounding_box;
 }
 
 void Player::Draw() {
     DrawTexturePro(*Textures[motion_index], { 0, 0, PeopleWidth, PeopleHeight }, { x - 20, y - 20, PeopleWidth + 40, PeopleHeight + 20}, { 0, 0 }, 0, WHITE);
-    DrawRectangleLines(x, y, PeopleWidth, PeopleHeight, RED);
+    DrawRectangleLines(this->x + 10, this->y, PeopleWidth - 20, PeopleHeight, RED);
 }
 
 Player::~Player() {
