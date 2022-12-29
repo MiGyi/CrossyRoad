@@ -55,7 +55,7 @@ void Map::GenLane() {
         int getRand = GetRandomValue(0, 1); // 0: Vehicle from right to left, 1: Vehicle from left to right
         int getRandType = GetRandomValue(0, 1); //0: Forest, 1: Road
         getRand += getRand;
-        if (getRandType) Lines.push_back(new Road(y, RandLineSafety[i], speed * (getRand - 1.0f), NumOfVehicles)); // TODO: add texture constructor for Road
+        if (getRandType) Lines.push_back(new Road(LaneTexture[getRandType][0], y, RandLineSafety[i], speed * (getRand - 1.0f), NumOfVehicles)); // TODO: add texture constructor for Road
             else Lines.push_back(new Forest(LaneTexture[getRandType][GetRandomValue(0, 2)], y, RandLineSafety[i], speed * (getRand - 1.0f), NumOfAnimals));
         y += (screenHeight * 1.0f) / (NumOfLanes * 1.0f);
     }

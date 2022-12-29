@@ -9,6 +9,14 @@ Road::Road(float y, bool isSafe, float speed, int MaxObject) {
     this->MaxObject = isSafe ? 0 : MaxObject;
 }
 
+Road::Road(Texture2D *texture, float y, bool isSafe, float speed, int MaxObject) {
+    this->texture = texture;
+    this->y = y;
+    this->speed = speed;
+    this->isSafe = isSafe;
+    this->MaxObject = isSafe ? 0 : MaxObject;
+}
+
 void Road::GenerateObject() {
     if (Objects.size() >= MaxObject) return;
     if (speed > 0 && !Objects.empty() && Objects.back()->GetX() < 100) return;

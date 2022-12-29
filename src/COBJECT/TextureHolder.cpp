@@ -42,7 +42,12 @@ void TextureHolder::LoadAllTexture() {
     }
 
     // Load Road Texture
-    
+    string road_textures_filepath = "../resources/Pictures/Lane/Road/";
+    for (int i = 1; i <= 1; i++) {
+        Texture2D *texture = new Texture2D();
+        GetTexture(LaneWidth, LaneHeight, road_textures_filepath + char(i + '0') + ".png", *texture);
+        Road.push_back(texture);
+    }    
 }
 
 // TextureHolder::~TextureHolder() {
@@ -101,12 +106,28 @@ vector <Texture2D *> TextureHolder::GetForestTextures() {
     return TextureHolder::Forest;
 }
 
+Texture2D *TextureHolder::GetForest(int index) {
+    return TextureHolder::Forest[index];
+}
+
 vector <Texture2D *> TextureHolder::GetRoadTextures() {
     return TextureHolder::Road;
 }
 
+Texture2D *TextureHolder::GetRoad(int index) {
+    return TextureHolder::Road[index];
+}
+
 vector <Texture2D *> TextureHolder::GetTrafficLight() {
     return TextureHolder::Traffic_light;
+}
+
+vector <Texture2D *> TextureHolder::GetVehicle(int index) {
+    return TextureHolder::Vehicle[index];
+}
+
+vector <Texture2D *> TextureHolder::GetAnimal(int index) {
+    return TextureHolder::Animal[index];
 }
 
 void TextureHolder::LoadTexture(const string& filepath, const string& name) {

@@ -24,6 +24,10 @@ public:
     void LoadTexture(const std::string& filepath, const std::string& name);
     static std::vector <Texture2D *> GetCharacter(int Character);
     static std::vector <Texture2D *> GetForestTextures();
+    static Texture2D *GetForest(int ForestType);
     static std::vector <Texture2D *> GetRoadTextures();
+    static Texture2D *GetRoad(int RoadType);
     static std::vector <Texture2D *> GetTrafficLight();
+    static std::vector <Texture2D *> GetVehicle(int Vehicle);
+    static std::vector <Texture2D *> GetAnimal(int Animal);
 };
