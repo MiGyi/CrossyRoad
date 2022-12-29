@@ -26,8 +26,7 @@ class Map {
         float speed;
     public:
         Map();
-        Map(float Speed, int NumOfLines, int NumOfVehicles, int NumOfAnimals);
-        Map(TextureHolder *textureHD, float speed, int NumOfLanes, int NumOfVehicles, int NumOfAnimals);
+        Map(float speed, int NumOfLanes, int NumOfVehicles, int NumOfAnimals);
         void GenLane();
         bool Collision(Rectangle Player);
         void Update(float DeltaTime);

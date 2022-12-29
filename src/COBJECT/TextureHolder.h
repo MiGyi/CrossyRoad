@@ -9,20 +9,21 @@
 
 class TextureHolder {
 private:
-    std::vector <Texture2D *> Character[NumberOfCharacter];
-    std::vector <Texture2D *> Vehicle[3];
-    std::vector <Texture2D *> Animal[3];
-    std::vector <Texture2D *> Traffic_light;
-    std::vector <Texture2D *> Forest;
-    std::vector <Texture2D *> Road;
+    static std::vector <Texture2D *> Character[NumberOfCharacter];
+    static std::vector <Texture2D *> Vehicle[3];
+    static std::vector <Texture2D *> Animal[3];
+    static std::vector <Texture2D *> Traffic_light;
+    static std::vector <Texture2D *> Forest;
+    static std::vector <Texture2D *> Road;
     
 public:
-    TextureHolder();
-    ~TextureHolder();
+    // TextureHolder();
+    // ~TextureHolder();
+    static void LoadAllTexture();
+    static void UnloadAllTexture();
     void LoadTexture(const std::string& filepath, const std::string& name);
-    std::vector <Texture2D *> GetCharacter(int Character);
-    std::vector <Texture2D *> GetForestTextures();
-    std::vector <Texture2D *> GetRoadTextures();
-    std::vector <Texture2D *> GetTrafficLight();
-    void Clear();
+    static std::vector <Texture2D *> GetCharacter(int Character);
+    static std::vector <Texture2D *> GetForestTextures();
+    static std::vector <Texture2D *> GetRoadTextures();
+    static std::vector <Texture2D *> GetTrafficLight();
 };

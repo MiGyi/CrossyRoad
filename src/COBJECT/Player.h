@@ -22,7 +22,8 @@ class Player {
         Rectangle Bounding_box;
     public:
         Player();
-        Player(TextureHolder *TextureHD, int Character);
+        Player(int Character);
+        // Player(TextureHolder *TextureHD, int Character);
         bool Update(float DeltaTime);
         Rectangle getBoundingBox();
         void Draw();

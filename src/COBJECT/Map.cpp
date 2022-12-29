@@ -19,28 +19,28 @@ Map::Map() { // Default constructor for testing, will be removed later, default 
     Lines.push_back(new Forest(y, true, 0, 0)); // first line is always safe
 }
 
-Map::Map(float Speed, int NumOfLines, int NumOfVehicles, int NumOfAnimals) {
-    float y = 0;
-    int NumOfSafeLine = NumOfLines / 3 * 2 - 1; // 2/3 of lines are safe, first line is always safe
-    int *RandLineSafety = new int [NumOfLines - 1]; // 1: safe, 0: unsafe
-    for (int i = 0; i < NumOfLines; i++) RandLineSafety[i] = 1;
-    for (int i = 0; i < NumOfSafeLine; i++) RandLineSafety[i] = 0;
-    shuffle(RandLineSafety, RandLineSafety + NumOfLines - 1, default_random_engine(time(NULL)));
-    for (int i = 0; i < NumOfLines - 1; i++) {
-        int getRand = GetRandomValue(0, 1); // 0: Vehicle from right to left, 1: Vehicle from left to right
-        int getRandType = GetRandomValue(0, 1); //0: Forest, 1: Road
-        getRand += getRand;
-        if (getRandType) Lines.push_back(new Road(y, RandLineSafety[i], Speed * (getRand - 1.0f), NumOfVehicles));
-            else Lines.push_back(new Forest(y, RandLineSafety[i], Speed * (getRand - 1.0f), NumOfAnimals));
-        y += (screenHeight * 1.0f) / (NumOfLines * 1.0f);
-    }
-    delete [] RandLineSafety;
-    Lines.push_back(new Forest(y, true, 0, 0)); // first line is always safe
-}
+// Map::Map(float Speed, int NumOfLines, int NumOfVehicles, int NumOfAnimals) {
+//     float y = 0;
+//     int NumOfSafeLine = NumOfLines / 3 * 2 - 1; // 2/3 of lines are safe, first line is always safe
+//     int *RandLineSafety = new int [NumOfLines - 1]; // 1: safe, 0: unsafe
+//     for (int i = 0; i < NumOfLines; i++) RandLineSafety[i] = 1;
+//     for (int i = 0; i < NumOfSafeLine; i++) RandLineSafety[i] = 0;
+//     shuffle(RandLineSafety, RandLineSafety + NumOfLines - 1, default_random_engine(time(NULL)));
+//     for (int i = 0; i < NumOfLines - 1; i++) {
+//         int getRand = GetRandomValue(0, 1); // 0: Vehicle from right to left, 1: Vehicle from left to right
+//         int getRandType = GetRandomValue(0, 1); //0: Forest, 1: Road
+//         getRand += getRand;
+//         if (getRandType) Lines.push_back(new Road(y, RandLineSafety[i], Speed * (getRand - 1.0f), NumOfVehicles));
+//             else Lines.push_back(new Forest(y, RandLineSafety[i], Speed * (getRand - 1.0f), NumOfAnimals));
+//         y += (screenHeight * 1.0f) / (NumOfLines * 1.0f);
+//     }
+//     delete [] RandLineSafety;
+//     Lines.push_back(new Forest(y, true, 0, 0)); // first line is always safe
+// }
 
-Map::Map(TextureHolder *textureHD, float speed, int NumOfLanes, int NumOfVehicles, int NumOfAnimals) {
-    LaneTexture[0] = textureHD->GetForestTextures();
-    LaneTexture[1] = textureHD->GetRoadTextures();
+Map::Map(float speed, int NumOfLanes, int NumOfVehicles, int NumOfAnimals) {
+    LaneTexture[0] = TextureHolder::GetForestTextures();
+    LaneTexture[1] = TextureHolder::GetRoadTextures();
     RegenMap(speed, NumOfLanes, NumOfVehicles, NumOfAnimals);
 }
 

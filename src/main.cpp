@@ -23,8 +23,10 @@ int main()
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
     // Init texture holder
-    TextureHolder *textureHolder = new TextureHolder();
-    Game *game = new Game(textureHolder);
+    // TextureHolder *textureHolder = new TextureHolder();
+    // Game *game = new Game(textureHolder);
+    TextureHolder::LoadAllTexture();
+    Game *game = new Game();
     // cerr << "Test game constructor" << endl;
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
@@ -41,7 +43,8 @@ int main()
     
     // De-Initialization
     if (game) delete game;
-    delete textureHolder;
+    // delete textureHolder;
+    TextureHolder::UnloadAllTexture();
     //--------------------------------------------------------------------------------------
     CloseWindow();                  // Close window and OpenGL context
     //--------------------------------------------------------------------------------------

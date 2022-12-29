@@ -24,7 +24,6 @@ class Game {
 
     public:
         Game();
-        Game(TextureHolder *textureHolder);
         ~Game();
         bool loop();
 

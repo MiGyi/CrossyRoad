@@ -11,12 +11,21 @@ Player::Player()
     Bounding_box = { this->x, this->y, PeopleWidth, PeopleHeight };
 }
 
-Player::Player(TextureHolder *TextureHD, int Character)
+// Player::Player(TextureHolder *TextureHD, int Character)
+// {
+//     x = (screenWidth - PeopleWidth) / 2;
+//     y = screenHeight - PeopleHeight;
+//     isAlive = true;
+//     Textures = TextureHD->GetCharacter(Character);
+//     Bounding_box = { this->x + 10, this->y, PeopleWidth - 20, PeopleHeight};
+// }
+
+Player::Player(int Character)
 {
     x = (screenWidth - PeopleWidth) / 2;
     y = screenHeight - PeopleHeight;
     isAlive = true;
-    Textures = TextureHD->GetCharacter(Character);
+    Textures = TextureHolder::GetCharacter(Character);
     Bounding_box = { this->x + 10, this->y, PeopleWidth - 20, PeopleHeight};
 }
 

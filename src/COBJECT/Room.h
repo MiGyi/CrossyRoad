@@ -17,7 +17,6 @@ private:
 
 public:
     Room();
-    Room(TextureHolder *textureHolder);
     ~Room();
     bool Collision();
     void Update(float GFT);

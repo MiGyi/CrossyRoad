@@ -2,7 +2,14 @@
 
 using namespace std;
 
-TextureHolder::TextureHolder() {
+std::vector <Texture2D *> TextureHolder::Character[NumberOfCharacter];
+std::vector <Texture2D *> TextureHolder::Vehicle[3];
+std::vector <Texture2D *> TextureHolder::Animal[3];
+std::vector <Texture2D *> TextureHolder::Traffic_light;
+std::vector <Texture2D *> TextureHolder::Forest;
+std::vector <Texture2D *> TextureHolder::Road;
+
+void TextureHolder::LoadAllTexture() {
     string character_textures_filepath = "../resources/Pictures/Character/";
     string traffic_light_textures_filepath = "../resources/Pictures/Traffic_light/";
     for (int i = 0; i < NumberOfCharacter; i++) {
@@ -38,11 +45,11 @@ TextureHolder::TextureHolder() {
     
 }
 
-TextureHolder::~TextureHolder() {
-    Clear();
-}
+// TextureHolder::~TextureHolder() {
+//     Clear();
+// }
 
-void TextureHolder::Clear() {
+void TextureHolder::UnloadAllTexture() {
     for (int i = 0; i < NumberOfCharacter; i++) {
         for (int j = 0; j < Character[i].size(); j++) {
             UnloadTexture(*Character[i][j]);
@@ -87,19 +94,19 @@ void TextureHolder::Clear() {
 }
 
 vector <Texture2D *> TextureHolder::GetCharacter(int Character) {
-    return this->Character[Character];
+    return TextureHolder::Character[Character];
 }
 
 vector <Texture2D *> TextureHolder::GetForestTextures() {
-    return this->Forest;
+    return TextureHolder::Forest;
 }
 
 vector <Texture2D *> TextureHolder::GetRoadTextures() {
-    return this->Road;
+    return TextureHolder::Road;
 }
 
 vector <Texture2D *> TextureHolder::GetTrafficLight() {
-    return this->Traffic_light;
+    return TextureHolder::Traffic_light;
 }
 
 void TextureHolder::LoadTexture(const string& filepath, const string& name) {

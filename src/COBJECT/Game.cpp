@@ -6,10 +6,6 @@ Game::Game() { //default constructor for testing purpose
     room = new Room();
 }
 
-Game::Game(TextureHolder *textureHolder) { //default constructor for testing purpose
-    room = new Room(textureHolder);
-}
-
 Game::~Game() {
     delete room;
 }
