@@ -1,5 +1,6 @@
 #include "Line.h"
 #include "Vehicle.h"
+#include "TrafficLight.h"
 
 class Road: public Line {
     public:

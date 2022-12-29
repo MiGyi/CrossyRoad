@@ -3,11 +3,11 @@
 #include <iostream>
 using namespace std;
 
-TrafficLight::TrafficLight(TextureHolder *TextureHD, float y) {
+TrafficLight::TrafficLight(float y) {
     this->x = 0;
     this->y = y;
     this->speed = 0;
-    this->motion = TextureHD->GetTrafficLight();
+    this->motion = TextureHolder::GetTrafficLight();
 }
 
 void TrafficLight::Update(float DeltaTime) {
@@ -20,20 +20,24 @@ void TrafficLight::Update(float DeltaTime) {
 }
 
 void TrafficLight::UpdateTexture() {
-    time++;
-    if (time == timeToChange[(int)state]) {
-        time = 0;
+    curTime++;
+    if (curTime == timeToChange[(int)state]) {
+        curTime = 0;
         state = (TrafficLightState)(((int)state + 1) % 3);
     }
 }
 
 void TrafficLight::Draw() {
-    DrawTexturePro(*motion[0], { 0, 0, TrafficLightWidth, TrafficLightHeight }, { x, y, TrafficLightWidth, TrafficLightHeight }, { 0, 0 }, 0, WHITE);
+    DrawTexturePro(*motion[(int)state], { 0, 0, TrafficLightWidth, TrafficLightHeight }, { x, y, TrafficLightWidth, TrafficLightHeight }, { 0, 0 }, 0, WHITE);
     DrawRectangleLines(x, y, TrafficLightWidth, TrafficLightHeight, RED);
 }
 
 Rectangle TrafficLight::getBoundingBox() {
     return { x, y, TrafficLightWidth, TrafficLightHeight };
+}
+
+TrafficLightState TrafficLight::GetState() {
+    return state;
 }
 
 TrafficLight::~TrafficLight() {

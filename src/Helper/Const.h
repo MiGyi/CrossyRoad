@@ -10,8 +10,8 @@ const int screenHeight = 900;
 const int PeopleWidth = 70;
 const int PeopleHeight = 70;
 
-const int TrafficLightWidth = 1688;
-const int TrafficLightHeight = 1800;
+const int TrafficLightWidth = 72;
+const int TrafficLightHeight = 72;
 
 const int VehicleWidth = 150;
 const int VehicleHeight = 100;
