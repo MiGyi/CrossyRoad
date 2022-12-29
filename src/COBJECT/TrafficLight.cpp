@@ -11,7 +11,20 @@ TrafficLight::TrafficLight(TextureHolder *TextureHD, float y) {
 }
 
 void TrafficLight::Update(float DeltaTime) {
-    
+    timeCounter++;
+    if (timeCounter == GetFPS()) {
+        timeCounter = 0;
+        // call UpdateTexture() every second
+        UpdateTexture();
+    }
+}
+
+void TrafficLight::UpdateTexture() {
+    time++;
+    if (time == timeToChange[(int)state]) {
+        time = 0;
+        state = (TrafficLightState)(((int)state + 1) % 3);
+    }
 }
 
 void TrafficLight::Draw() {
