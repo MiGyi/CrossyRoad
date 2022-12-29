@@ -13,8 +13,8 @@ const int PeopleHeight = 70;
 const int TrafficLightWidth = 72;
 const int TrafficLightHeight = 72;
 
-const int VehicleWidth = 150;
-const int VehicleHeight = 100;
+const int VehicleWidth = 113;
+const int VehicleHeight = 70;
 
 const int AnimalWidth = 100;
 const int AnimalHeight = 100;
@@ -26,3 +26,4 @@ const int LaneWidth = screenWidth;
 
 const int NumberOfCharacter = 1;
 const int NumberOfTrafficLight = 3;
+const int NumberOfVehicle = 3;

@@ -10,7 +10,7 @@
 class TextureHolder {
 private:
     static std::vector <Texture2D *> Character[NumberOfCharacter];
-    static std::vector <Texture2D *> Vehicle[3];
+    static std::vector <Texture2D *> Vehicle;
     static std::vector <Texture2D *> Animal[3];
     static std::vector <Texture2D *> Traffic_light;
     static std::vector <Texture2D *> Forest;
@@ -28,6 +28,6 @@ public:
     static std::vector <Texture2D *> GetRoadTextures();
     static Texture2D *GetRoad(int RoadType);
     static std::vector <Texture2D *> GetTrafficLight();
-    static std::vector <Texture2D *> GetVehicle(int Vehicle);
+    static std::vector <Texture2D *> GetVehicle();
     static std::vector <Texture2D *> GetAnimal(int Animal);
 };
