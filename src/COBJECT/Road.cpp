@@ -54,7 +54,7 @@ void Road::Draw() {
 }
 
 void Road::GenerateObject() {
-    if (Objects.size() >= MaxObject) return;
+    if ((int)Objects.size() >= MaxObject) return;
     if (speed > 0 && !Objects.empty() && Objects.back()->GetX() < 100) return;
     if (speed < 0 && !Objects.empty() && Objects.back()->GetX() > screenWidth - 200) return;
     int getRand = GetRandomValue(1, 150); 

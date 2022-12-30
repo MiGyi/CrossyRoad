@@ -20,7 +20,7 @@ void Animal::Update(float DeltaTime) {
         this->motion_timer = 0.0f;
     }
 
-    if (this->motion_index >= this->motion.size()) {
+    if (this->motion_index >= (int)this->motion.size()) {
         this->motion_index = 0;
     }
     this->x += DeltaTime * this->speed;

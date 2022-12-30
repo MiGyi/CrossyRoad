@@ -3,7 +3,7 @@
 using namespace std;
 
 Room::Room() { //default constructor for testing purpose
-    int Character = 0;
+    // int Character = 0;
     // Choose character function
     player = new Player(GetRandomValue(0, 2));
     map = new Map(this->speed, 9, 6, 6);

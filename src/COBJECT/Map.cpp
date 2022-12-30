@@ -90,7 +90,7 @@ void Map::RegenMap(float Speed, int NumOfLines, int NumOfVehicles, int NumOfAnim
     this->NumOfVehicles = NumOfVehicles;
     this->NumOfAnimals = NumOfAnimals;
 
-    for (int i = 0; i < Lines.size(); i++) {
+    for (int i = 0; i < (int)Lines.size(); i++) {
         Lines[i]->ClearObject();
     }
     while (!Lines.empty()) {

@@ -77,7 +77,7 @@ void TextureHolder::LoadAllTexture() {
 void TextureHolder::UnloadAllTexture() {
     // Unload Character Texture
     for (int i = 0; i < NumberOfCharacter; i++) {
-        for (int j = 0; j < Character[i].size(); j++) {
+        for (int j = 0; j < (int)Character[i].size(); j++) {
             UnloadTexture(*Character[i][j]);
             delete Character[i][j];
         }
@@ -93,7 +93,7 @@ void TextureHolder::UnloadAllTexture() {
 
     // Unload Animal Texture
     for (int i = 0; i < NumberOfAnimal; i++) {
-        for (int j = 0; j < Animal[i].size(); j++) {
+        for (int j = 0; j < (int)Animal[i].size(); j++) {
             UnloadTexture(*Animal[i][j]);
             delete Animal[i][j];
         }
@@ -108,14 +108,14 @@ void TextureHolder::UnloadAllTexture() {
     }
 
     // Unload Forest Texture
-    for (int i = 0; i < Forest.size(); i++) {
+    for (int i = 0; i < (int)Forest.size(); i++) {
         UnloadTexture(*Forest[i]);
         delete Forest[i];
     }
     Forest.clear();
 
     // Unload Road Texture
-    for (int i = 0; i < Road.size(); i++) {
+    for (int i = 0; i < (int)Road.size(); i++) {
         UnloadTexture(*Road[i]);
         delete Road[i];
     }
