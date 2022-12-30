@@ -3,6 +3,7 @@
 #include "raylib.h"
 #include "../Helper/Const.h"
 #include "../Helper/TextureHelper.h"
+#include "TextureHolder.h"
 #include "Object.h"
 
 #include <algorithm>
@@ -12,9 +13,10 @@
 
 class Vehicle: public Object {
     private:
-
+        int direction;
+        int index;
     public:
-        Vehicle(float y, float speed, bool FromLeftToRight); 
+        Vehicle(float y, float speed, bool FromLeftToRight, int index); 
         void Update(float DeltaTime);
         void Draw();
         Rectangle getBoundingBox();

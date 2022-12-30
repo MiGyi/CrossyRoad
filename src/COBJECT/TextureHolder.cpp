@@ -3,7 +3,7 @@
 using namespace std;
 
 std::vector <Texture2D *> TextureHolder::Character[NumberOfCharacter];
-std::vector <Texture2D *> TextureHolder::Vehicle[3];
+std::vector <Texture2D *> TextureHolder::Vehicle;
 std::vector <Texture2D *> TextureHolder::Animal[3];
 std::vector <Texture2D *> TextureHolder::Traffic_light;
 std::vector <Texture2D *> TextureHolder::Forest;
@@ -26,6 +26,7 @@ void TextureHolder::LoadAllTexture() {
         }
     }
 
+    // Load Traffic Light Texture
     for (int i = 0; i < NumberOfTrafficLight; i++) {
         string traf_i_filepath = "../resources/Pictures/Traffic_light/" + to_string(i) + ".png";
         Texture2D *texture = new Texture2D();
@@ -47,7 +48,15 @@ void TextureHolder::LoadAllTexture() {
         Texture2D *texture = new Texture2D();
         GetTexture(LaneWidth, LaneHeight, road_textures_filepath + char(i + '0') + ".png", *texture);
         Road.push_back(texture);
-    }    
+    }
+
+    // Load Vehicle Texture
+    string vehicle_textures_filepath = "../resources/Pictures/Vehicle/";
+    for (int i = 0; i < NumberOfVehicle; i++) {
+        Texture2D *texture = new Texture2D();
+        GetTexture(VehicleWidth, VehicleHeight, vehicle_textures_filepath + char(i + '0') + ".png", *texture);
+        Vehicle.push_back(texture);
+    }
 }
 
 // TextureHolder::~TextureHolder() {
@@ -64,12 +73,11 @@ void TextureHolder::UnloadAllTexture() {
     }
 
     for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < Vehicle[i].size(); j++) {
-            UnloadTexture(*Vehicle[i][j]);
-            delete Vehicle[i][j];
-        }
-        Vehicle[i].clear();
+        UnloadTexture(*Vehicle[i]);
+        delete Vehicle[i];
     }
+    Vehicle.clear();
+
 
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < Animal[i].size(); j++) {
@@ -122,8 +130,8 @@ vector <Texture2D *> TextureHolder::GetTrafficLight() {
     return TextureHolder::Traffic_light;
 }
 
-vector <Texture2D *> TextureHolder::GetVehicle(int index) {
-    return TextureHolder::Vehicle[index];
+vector <Texture2D *> TextureHolder::GetVehicle() {
+    return TextureHolder::Vehicle;
 }
 
 vector <Texture2D *> TextureHolder::GetAnimal(int index) {
