@@ -4,24 +4,26 @@ using namespace std;
 
 Game::Game() { //default constructor for testing purpose
     room = new Room();
+    state = GameState::Running;
 }
 
 Game::~Game() {
     delete room;
 }
 
-bool Game::loop() {
-    float GFT = GetFrameTime(); 
-    room->Update(GFT);
+bool Game::update() {
+    // check if game is running
+    if (state == GameState::Running) {
+        float GFT = GetFrameTime(); 
+        room->Update(GFT);
 
-    if (room->Collision()) {
-        // cerr << "Collision" << endl;
-        delete room;
-        room = nullptr;
-        return false;
+        if (room->Collision()) {
+            // cerr << "Collision" << endl;
+            delete room;
+            room = nullptr;
+            return false;
+        }
     }
-
-    // cerr << "Test game collision" << endl;
 
     BeginDrawing();
         ClearBackground(GRAY);
@@ -31,5 +33,13 @@ bool Game::loop() {
     EndDrawing();
 
     return true;
+}
+
+void Game::pauseToggle() {
+    if (state == GameState::Running) {
+        state = GameState::Paused;
+    } else if (state == GameState::Paused) {
+        state = GameState::Running;
+    }
 }
 

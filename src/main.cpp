@@ -31,7 +31,13 @@ int main()
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-        if (!game->loop()) {
+        // Test game pause
+        if (IsKeyPressed(KEY_SPACE)) {
+            game->pauseToggle();
+        }
+
+        // Update and Draw
+        if (!game->update()) {
             delete game;
             game = nullptr;
 

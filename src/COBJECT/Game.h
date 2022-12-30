@@ -25,7 +25,8 @@ class Game {
     public:
         Game();
         ~Game();
-        bool loop();
+        bool update();
+        void pauseToggle();
 
         void saveGame();
         void loadGame();
