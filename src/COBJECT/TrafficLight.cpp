@@ -11,9 +11,9 @@ TrafficLight::TrafficLight(float y) {
 }
 
 void TrafficLight::Update(float DeltaTime) {
-    timeCounter++;
-    if (timeCounter == GetFPS()) {
-        timeCounter = 0;
+    deltaTimeCounter += DeltaTime;
+    if (deltaTimeCounter >= 1.0f) {
+        deltaTimeCounter = 0.0f;
         // call UpdateTexture() every second
         UpdateTexture();
     }

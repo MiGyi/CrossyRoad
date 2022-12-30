@@ -22,7 +22,7 @@ class TrafficLight: public Object {
         const int timeToChange[3] = { 5, 1, 3 };
         TrafficLightState state = TrafficLightState::Green;
         int curTime = 0;
-        int timeCounter = 0;
+        float deltaTimeCounter = 0.0f;
     public:
         TrafficLight(float y); 
         void Update(float DeltaTime);
