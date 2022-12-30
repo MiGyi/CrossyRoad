@@ -24,7 +24,7 @@ class Line {
         int MaxObject;
 
     public: 
-        void Update(float DeltaTime);
+        virtual void Update(float DeltaTime);
         virtual void Draw();
         virtual void GenerateObject() = 0;
         bool Collision(Rectangle Player);

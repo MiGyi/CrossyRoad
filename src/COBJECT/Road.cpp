@@ -19,6 +19,32 @@ Road::Road(Texture2D *texture, float y, bool isSafe, float speed, int MaxObject)
     this->Trafficlight = new TrafficLight(y);
 }
 
+void Road::Update(float DeltaTime) {
+    if (isSafe) return;
+
+    if (Objects.size() > 0) {
+        
+        if (this->speed > 0 && Objects.back()->GetX() > screenWidth) {
+            delete Objects.front();
+            Objects.erase(Objects.begin());
+        }
+
+        if (this->speed < 0 && Objects.front()->GetX() < -VehicleWidth * 2.0f) {
+            delete Objects.front();
+            Objects.erase(Objects.begin());
+        }
+
+    }
+
+    GenerateObject();
+
+    for (auto &i : Objects) {
+        i->Update(DeltaTime);
+    }
+    
+    Trafficlight->Update(DeltaTime);
+}
+
 void Road::Draw() {
     if (texture != nullptr) DrawTexture(*texture, 0, y, WHITE);
         else DrawTexturePro(*texture, { 0, y, LaneWidth, LaneHeight }, {0, y, LaneWidth, LaneHeight}, { 0, 0 }, 0, WHITE);

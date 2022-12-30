@@ -26,6 +26,4 @@ const int LaneWidth = screenWidth;
 
 const int NumberOfCharacter = 3;
 const int NumberOfTrafficLight = 3;
-const int NumberOfCharacter = 1;
-const int NumberOfTrafficLight = 3;
 const int NumberOfVehicle = 3;
