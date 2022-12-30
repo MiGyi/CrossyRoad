@@ -24,6 +24,7 @@ class Line {
         int MaxObject;
 
     public: 
+        virtual ~Line() {}
         virtual void Update(float DeltaTime);
         virtual void Draw();
         virtual void GenerateObject() = 0;
