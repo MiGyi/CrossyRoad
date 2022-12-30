@@ -4,7 +4,7 @@
 
 class Road: public Line {
     private:
-        TrafficLight *Trafficlight = nullptr;
+        TrafficLight *trafficLight = nullptr;
     public:
         Road(float y, bool isSafe, float speed, int MaxObject);
         Road(Texture2D *texture, float y, bool isSafe, float speed, int MaxObject);
