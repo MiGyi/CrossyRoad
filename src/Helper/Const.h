@@ -24,5 +24,5 @@ const int NumberOfLine = 9;
 const int LaneHeight = screenHeight / NumberOfLine; // 1 map = 9 lanes
 const int LaneWidth = screenWidth;
 
-const int NumberOfCharacter = 1;
+const int NumberOfCharacter = 3;
 const int NumberOfTrafficLight = 3;
