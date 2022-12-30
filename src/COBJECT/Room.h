@@ -13,7 +13,7 @@ class Room{
 private:
     Player *player = nullptr;
     Map *map = nullptr;
-    float speed = 100.0f;
+    float speed = BaseSpeed;
 
 public:
     Room();

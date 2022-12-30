@@ -16,8 +16,8 @@ const int TrafficLightHeight = 72;
 const int VehicleWidth = 113;
 const int VehicleHeight = 70;
 
-const int AnimalWidth = 100;
-const int AnimalHeight = 100;
+const int AnimalWidth = 48;
+const int AnimalHeight = 48;
 
 const int NumberOfLine = 9;
 
@@ -27,3 +27,7 @@ const int LaneWidth = screenWidth;
 const int NumberOfCharacter = 3;
 const int NumberOfTrafficLight = 3;
 const int NumberOfVehicle = 3;
+const int NumberOfAnimal = 4;
+
+const float BaseSpeed = 100.0f;
+const float AnimalAnimationSpeed = 1.25f;

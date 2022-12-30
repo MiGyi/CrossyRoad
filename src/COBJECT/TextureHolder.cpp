@@ -4,14 +4,14 @@ using namespace std;
 
 std::vector <Texture2D *> TextureHolder::Character[NumberOfCharacter];
 std::vector <Texture2D *> TextureHolder::Vehicle;
-std::vector <Texture2D *> TextureHolder::Animal[3];
+std::vector <Texture2D *> TextureHolder::Animal[NumberOfAnimal];
 std::vector <Texture2D *> TextureHolder::Traffic_light;
 std::vector <Texture2D *> TextureHolder::Forest;
 std::vector <Texture2D *> TextureHolder::Road;
 
 void TextureHolder::LoadAllTexture() {
+    // Load Character Texture
     string character_textures_filepath = "../resources/Pictures/Character/";
-    string traffic_light_textures_filepath = "../resources/Pictures/Traffic_light/";
     for (int i = 0; i < NumberOfCharacter; i++) {
         string char_i_filepath = character_textures_filepath + char(i + '0') + "/";
         for (int j = 1; j <= 9; j++) {
@@ -23,6 +23,17 @@ void TextureHolder::LoadAllTexture() {
             Texture2D *texture = new Texture2D();
             GetTexture(PeopleWidth, PeopleHeight, char_i_filepath + "image_part_01" + char(j + '0') + ".png", *texture);
             Character[i].push_back(texture);
+        }
+    }
+
+    // Load Animal Texture
+    string animal_textures_filepath = "../resources/Pictures/Animal/";
+    for (int i = 0; i < NumberOfAnimal; i++) {
+        string animal_i_filepath = animal_textures_filepath + char(i + '0') + "/";
+        for (int j = 0; j < 3; j++) {
+            Texture2D *texture = new Texture2D();
+            GetTexture(AnimalWidth, AnimalHeight, animal_i_filepath + char(j + '0') + ".png", *texture);
+            Animal[i].push_back(texture);
         }
     }
 
@@ -64,6 +75,7 @@ void TextureHolder::LoadAllTexture() {
 // }
 
 void TextureHolder::UnloadAllTexture() {
+    // Unload Character Texture
     for (int i = 0; i < NumberOfCharacter; i++) {
         for (int j = 0; j < Character[i].size(); j++) {
             UnloadTexture(*Character[i][j]);
@@ -72,14 +84,15 @@ void TextureHolder::UnloadAllTexture() {
         Character[i].clear();
     }
 
+    // Unload Vehicle Texture
     for (int i = 0; i < 3; i++) {
         UnloadTexture(*Vehicle[i]);
         delete Vehicle[i];
     }
     Vehicle.clear();
 
-
-    for (int i = 0; i < 3; i++) {
+    // Unload Animal Texture
+    for (int i = 0; i < NumberOfAnimal; i++) {
         for (int j = 0; j < Animal[i].size(); j++) {
             UnloadTexture(*Animal[i][j]);
             delete Animal[i][j];
@@ -87,18 +100,21 @@ void TextureHolder::UnloadAllTexture() {
         Animal[i].clear();
     }
 
+    // Unload Traffic Light Texture
     for (int i = 0; i < 3; i++) {
         UnloadTexture(*Traffic_light[i]);
         delete Traffic_light[i];
         Traffic_light.clear();
     }
 
+    // Unload Forest Texture
     for (int i = 0; i < Forest.size(); i++) {
         UnloadTexture(*Forest[i]);
         delete Forest[i];
     }
     Forest.clear();
 
+    // Unload Road Texture
     for (int i = 0; i < Road.size(); i++) {
         UnloadTexture(*Road[i]);
         delete Road[i];
