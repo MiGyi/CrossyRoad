@@ -8,6 +8,7 @@
 #include <math.h>
 #include <string>
 #include <vector>
+#include <fstream>
 
 class Object {
     protected:
@@ -26,5 +27,23 @@ class Object {
         virtual Rectangle getBoundingBox() = 0;
         bool Collision(Rectangle Player) {
             return CheckCollisionRecs(Player, getBoundingBox());
+        }
+
+        virtual void save(std::ofstream& fout) {
+            fout << x << ' ' << y << '\n';
+            fout << motion_timer << '\n';
+            fout << motion_index << '\n';
+            fout << Bounding_box.x << ' ' << Bounding_box.y << ' ' << Bounding_box.width << ' ' << Bounding_box.height << '\n';
+            fout << speed << '\n';
+        }
+
+        virtual void load(std::ifstream& fin) {
+            fin >> x >> y;
+            fin >> motion_timer;
+            fin >> motion_index;
+            float X, Y, Width, Height;
+            fin >> X >> Y >> Width >> Height;
+            Bounding_box = {X, Y, Width, Height};
+            fin >> speed;
         }
 };

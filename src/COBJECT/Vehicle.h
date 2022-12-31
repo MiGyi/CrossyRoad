@@ -10,15 +10,19 @@
 #include <math.h>
 #include <string>
 #include <vector>
+#include <fstream>
 
 class Vehicle: public Object {
     private:
         int direction;
         int index;
     public:
-        Vehicle(float y, float speed, bool FromLeftToRight, int index); 
+        Vehicle(float y, float speed, bool FromLeftToRight, int index);
         void Update(float DeltaTime);
         void Draw();
         Rectangle getBoundingBox();
         ~Vehicle();
+
+        void save(std::ofstream& fout);
+        void load(std::ifstream& fin);
 };

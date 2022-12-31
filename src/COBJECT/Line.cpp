@@ -7,7 +7,7 @@ void Line::Update(float DeltaTime) {
     if (isSafe) return;
 
     if (Objects.size() > 0) {
-        
+
         if (this->speed > 0 && Objects.back()->GetX() > screenWidth) {
             delete Objects.front();
             Objects.erase(Objects.begin());
@@ -48,5 +48,40 @@ void Line::ClearObject() {
     while (!Objects.empty()) {
         delete Objects.back();
         Objects.pop_back();
+    }
+}
+
+void Line::save(std::ofstream& fout) {
+    fout << x << ' ' << y << '\n';
+    fout << speed << '\n';
+    fout << isSafe << '\n';
+    fout << MaxObject << '\n';
+    fout << Objects.size() << '\n';
+    for (int i = 0; i < (int)Objects.size(); ++i) {
+        Objects[i]->save(fout);
+    }
+}
+
+void Line::load(std::ifstream& fin) {
+    fin >> x >> y;
+    fin >> speed;
+    fin >> isSafe;
+    fin >> MaxObject;
+
+    int n;
+    fin >> n;
+    for (int i = 0; i < n; ++i) {
+        int type;
+        fin >> type;
+        if (type) {
+            Vehicle* vehicle = new Vehicle(0, 0, 0, 0);
+            vehicle->load(fin);
+            Objects.push_back(vehicle);
+        }
+        else {
+            Animal* animal = new Animal(0, 0, 0, 0);
+            animal->load(fin);
+            Objects.push_back(animal);
+        }
     }
 }

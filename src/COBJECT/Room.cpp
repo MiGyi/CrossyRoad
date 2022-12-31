@@ -18,13 +18,17 @@ bool Room::Collision() {
     return map->Collision(player->getBoundingBox());
 }
 
-void Room::Update(float GFT) {
+bool Room::Update(float GFT) {
+    if (state == RoomState::Paused) return true;
+
     bool isOut = player->Update(GFT);
     if (isOut) { //Player is out of map
         this->speed += 50.0f;
         map->RegenMap(this->speed, 9, 6, 6);
     }
     map->Update(GFT);
+
+    return !Collision();
 }
 
 void Room::Draw() {
@@ -32,3 +36,30 @@ void Room::Draw() {
     player->Draw();
 }
 
+void Room::pauseToggle() {
+    if (state == RoomState::Running) {
+        state = RoomState::Paused;
+    } else if (state == RoomState::Paused) {
+        state = RoomState::Running;
+    }
+}
+
+
+void Room::save() {
+    std::ofstream fout("save.txt");
+    fout << score << '\n';
+    fout << speed << '\n';
+    player->save(fout);
+    map->save(fout);
+    fout.close();
+}
+
+void Room::load() {
+    std::ifstream fin("save.txt");
+    fin >> score;
+    fin >> speed;
+    player->load(fin);
+    map->load(fin);
+    fin.close();
+    state = RoomState::Paused;
+}
