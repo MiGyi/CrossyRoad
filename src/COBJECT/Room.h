@@ -9,16 +9,25 @@
 #include <vector>
 #include <iostream>
 
+enum class RoomState {
+    Running,
+    Paused,
+    GameOver
+};
+
 class Room{
 private:
+    RoomState state = RoomState::Running;
+    int score = 0;
+    float speed = BaseSpeed;
     Player *player = nullptr;
     Map *map = nullptr;
-    float speed = BaseSpeed;
-
+    
 public:
     Room();
     ~Room();
     bool Collision();
-    void Update(float GFT);
+    bool Update(float GFT);
     void Draw();
+    void pauseToggle();
 };

@@ -2,44 +2,98 @@
 
 using namespace std;
 
-Game::Game() { //default constructor for testing purpose
-    room = new Room();
-    state = GameState::Running;
+Game::Game() {
+    // Initialization
+    //--------------------------------------------------------------------------------------
+
+    InitWindow(screenWidth, screenHeight, "CrossyRoad");
+
+    //--------------------------------------------------------------------------------------
+    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
+    //--------------------------------------------------------------------------------------
+
+    // Init texture holder
+    TextureHolder::LoadAllTexture();
+    menu = new Menu();
 }
 
 Game::~Game() {
-    delete room;
+    if (room) delete room;
+    if (menu) delete menu;
+
+    TextureHolder::UnloadAllTexture();
+    //--------------------------------------------------------------------------------------
+    CloseWindow();                  // Close window and OpenGL context
+    //--------------------------------------------------------------------------------------
 }
 
-bool Game::update() {
-    // check if game is running
-    if (state == GameState::Running) {
-        float GFT = GetFrameTime(); 
-        room->Update(GFT);
-
-        if (room->Collision()) {
-            // cerr << "Collision" << endl;
-            delete room;
-            room = nullptr;
-            return false;
+void Game::run() {
+    while (!WindowShouldClose()) {// Detect window close button or ESC key
+        switch (state) {
+            // Update and Draw Room
+            case ScreenState::INGAME: {
+                updateRoom();
+                break;
+            }
+            // Update and Draw Menu
+            case ScreenState::MENU: {
+                updateMenu();
+                break;
+            }
+            case ScreenState::NONE: {
+            // Exit game
+                return;
+            }
+            default:
+                break;
         }
     }
+}
 
+void Game::updateRoom() {
+    // Check for pause
+    if (IsKeyPressed(KEY_SPACE)) {
+        room->pauseToggle();
+    }
+
+    // Update and check for collision
+    float GFT = GetFrameTime();
+    if (!room->Update(GFT)) {
+        // Delete room and return to menu
+        delete room;
+        room = nullptr;
+        state = ScreenState::MENU;
+
+        return;
+    }
+
+    // Draw
     BeginDrawing();
         ClearBackground(GRAY);
         room->Draw();
-        // cerr << "Test game draw" << endl;
         DrawFPS(0, 0);
     EndDrawing();
-
-    return true;
 }
 
-void Game::pauseToggle() {
-    if (state == GameState::Running) {
-        state = GameState::Paused;
-    } else if (state == GameState::Paused) {
-        state = GameState::Running;
+void Game::updateMenu() {
+    // Update and check for button press
+    MenuOptions curPressed = menu->Update();
+    if (curPressed == MenuOptions::NEWGAME) {
+        // Create new room and start game
+        room = new Room();
+        state = ScreenState::INGAME;
     }
-}
+    else if (curPressed == MenuOptions::EXIT) {
+        state = ScreenState::NONE; 
+    }
 
+    // } else if (curPressed == MenuOptions::LOADGAME) {
+    //     loadGame();
+
+    // Draw
+    BeginDrawing();
+        ClearBackground(GRAY);
+        menu->Draw();
+        DrawFPS(0, 0);
+    EndDrawing();
+}

@@ -6,28 +6,30 @@
 #include "Player.h"
 #include "TextureHolder.h"
 #include "Room.h"
+#include "Menu.h"
 
 #include <iostream>
 #include <vector>
 
-enum class GameState {
-    Running,
-    Paused,
-    GameOver
+enum class ScreenState {
+    MENU,
+    INGAME,
+    SCOREBOARD,
+    NONE = -1
 };
 
 class Game {
     private:
         Room *room = nullptr;
+        Menu *menu = nullptr;
         int score = 0;
-        GameState state;
-
+        ScreenState state = ScreenState::MENU;
     public:
         Game();
         ~Game();
-        bool update();
-        void pauseToggle();
-
+        void updateRoom();
+        void updateMenu();
+        void run();
         void saveGame();
         void loadGame();
 };
