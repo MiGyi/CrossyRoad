@@ -10,6 +10,7 @@
 #include <math.h>
 #include <string>
 #include <vector>
+#include <fstream>
 
 enum class TrafficLightState {
     Green,
@@ -24,11 +25,14 @@ class TrafficLight: public Object {
         int curTime = 0;
         float deltaTimeCounter = 0.0f;
     public:
-        TrafficLight(float y); 
+        TrafficLight(float y);
         void Update(float DeltaTime);
         void UpdateTexture();
         void Draw();
         Rectangle getBoundingBox();
         TrafficLightState GetState();
         ~TrafficLight();
+
+        void save(std::ofstream& fout);
+        void load(std::ifstream& fin);
 };

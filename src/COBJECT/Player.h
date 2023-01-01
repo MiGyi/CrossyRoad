@@ -11,6 +11,7 @@
 #include <vector>
 
 #include <iostream>
+#include <fstream>
 
 class Player {
     private:
@@ -20,6 +21,7 @@ class Player {
         float motion_timer = 0.0f;
         int motion_index = 0;
         Rectangle Bounding_box;
+        int CharacterType;
     public:
         Player();
         Player(int Character);
@@ -28,4 +30,7 @@ class Player {
         Rectangle getBoundingBox();
         void Draw();
         ~Player();
-};  
+
+        void save(std::ofstream& fout);
+        void load(std::ifstream& fin);
+};

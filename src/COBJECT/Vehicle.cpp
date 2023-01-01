@@ -22,7 +22,7 @@ void Vehicle::Update(float DeltaTime) {
 
 void Vehicle::Draw() {
     // DrawTexturePro(*motion[0], { 0, 0, VehicleWidth, VehicleWidth }, { x, y, VehicleWidth, VehicleHeight }, { 0, 0 }, 0, WHITE);
-    // DrawTextureV(*motion[2], {x, y}, WHITE); 
+    // DrawTextureV(*motion[2], {x, y}, WHITE);
     DrawTextureRec(*motion[index], {0, 0, VehicleWidth * float(direction), VehicleHeight }, {x, y}, WHITE);
     DrawRectangleLines(x, y, VehicleWidth, VehicleHeight, RED);
 }
@@ -35,3 +35,16 @@ Vehicle::~Vehicle() {
     motion.clear();
 }
 
+void Vehicle::save(std::ofstream& fout) {
+    fout << "1\n";
+    fout << direction << '\n';
+    fout << index << '\n';
+    Object::save(fout);
+}
+
+void Vehicle::load(std::ifstream& fin) {
+    fin >> direction;
+    fin >> index;
+    motion = TextureHolder::GetVehicle();
+    Object::load(fin);
+}

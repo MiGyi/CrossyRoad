@@ -13,6 +13,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <fstream>
 
 class Line {
     protected:
@@ -23,12 +24,15 @@ class Line {
         bool isSafe = false;
         int MaxObject;
 
-    public: 
+    public:
         virtual ~Line() {}
         virtual void Update(float DeltaTime);
         virtual void Draw();
         virtual void GenerateObject() = 0;
         bool Collision(Rectangle Player);
         void ClearObject();
+
+        virtual void save(std::ofstream& fout);
+        virtual void load(std::ifstream& fin);
 };
 

@@ -8,6 +8,13 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <fstream>
+
+enum class RoomState {
+    Running,
+    Paused,
+    GameOver
+};
 
 enum class RoomState {
     Running,
@@ -22,7 +29,6 @@ private:
     float speed = BaseSpeed;
     Player *player = nullptr;
     Map *map = nullptr;
-    
 public:
     Room();
     ~Room();
@@ -30,4 +36,7 @@ public:
     bool Update(float GFT);
     void Draw();
     void pauseToggle();
+
+    void save();
+    void load();
 };

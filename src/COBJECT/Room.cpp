@@ -44,3 +44,22 @@ void Room::pauseToggle() {
     }
 }
 
+
+void Room::save() {
+    std::ofstream fout("save.txt");
+    fout << score << '\n';
+    fout << speed << '\n';
+    player->save(fout);
+    map->save(fout);
+    fout.close();
+}
+
+void Room::load() {
+    std::ifstream fin("save.txt");
+    fin >> score;
+    fin >> speed;
+    player->load(fin);
+    map->load(fin);
+    fin.close();
+    state = RoomState::Paused;
+}

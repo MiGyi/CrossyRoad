@@ -15,6 +15,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <fstream>
 
 class Map {
     private:
@@ -33,4 +34,7 @@ class Map {
         void Draw();
         void RegenMap(float Speed, int NumOfLines, int NumOfVehicles, int NumOfAnimals);
         ~Map();
+
+        void save(std::ofstream& fout);
+        void load(std::ifstream& fin);
 };

@@ -40,4 +40,16 @@ Animal::~Animal() {
     motion.clear();
 }
 
+void Animal::save(std::ofstream& fout) {
+    fout << "0\n";
+    fout << direction << '\n';
+    fout << index << '\n';
+    Object::save(fout);
+}
 
+void Animal::load(std::ifstream& fin) {
+    fin >> direction;
+    fin >> index;
+    motion = TextureHolder::GetAnimal(index);
+    Object::load(fin);
+}

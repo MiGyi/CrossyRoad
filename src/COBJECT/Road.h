@@ -1,6 +1,7 @@
 #include "Line.h"
 #include "Vehicle.h"
 #include "TrafficLight.h"
+#include <fstream>
 
 class Road: public Line {
     private:
@@ -12,4 +13,7 @@ class Road: public Line {
         void Draw();
         void GenerateObject();
         ~Road();
+
+        void save(std::ofstream& fout);
+        void load(std::ifstream& fin, Texture2D* texture);
 };

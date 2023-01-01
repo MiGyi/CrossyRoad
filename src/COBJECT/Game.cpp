@@ -56,6 +56,15 @@ void Game::updateRoom() {
         room->pauseToggle();
     }
 
+    // test load and save
+    if (IsKeyPressed(KEY_S)) {
+        room->save();
+    }
+
+    if (IsKeyPressed(KEY_L)) {
+        room->load();
+    }
+
     // Update and check for collision
     float GFT = GetFrameTime();
     if (!room->Update(GFT)) {
@@ -84,7 +93,7 @@ void Game::updateMenu() {
         state = ScreenState::INGAME;
     }
     else if (curPressed == MenuOptions::EXIT) {
-        state = ScreenState::NONE; 
+        state = ScreenState::NONE;
     }
 
     // } else if (curPressed == MenuOptions::LOADGAME) {
@@ -96,4 +105,13 @@ void Game::updateMenu() {
         menu->Draw();
         DrawFPS(0, 0);
     EndDrawing();
+}
+
+void Game::saveGame() {
+    room->save();
+}
+
+void Game::loadGame() {
+    //room = new Room();
+    room->load();
 }

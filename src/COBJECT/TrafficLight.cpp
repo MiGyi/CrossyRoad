@@ -44,4 +44,23 @@ TrafficLight::~TrafficLight() {
     motion.clear();
 }
 
-    
+void TrafficLight::save(std::ofstream& fout) {
+    if (state == TrafficLightState::Green) fout << "Green\n";
+    else if (state == TrafficLightState::Red) fout << "Red\n";
+    else fout << "Yellow\n";
+    fout << curTime << '\n';
+    fout << deltaTimeCounter << '\n';
+    Object::save(fout);
+}
+
+void TrafficLight::load(std::ifstream& fin) {
+    string s;
+    fin >> s;
+    if (s == "Green") state = TrafficLightState::Green;
+    else if (s == "Red") state = TrafficLightState::Red;
+    else state = TrafficLightState::Yellow;
+    fin >> curTime;
+    fin >> deltaTimeCounter;
+    this->motion = TextureHolder::GetTrafficLight();
+    Object::load(fin);
+}
