@@ -61,6 +61,6 @@ void TrafficLight::load(std::ifstream& fin) {
     else state = TrafficLightState::Yellow;
     fin >> curTime;
     fin >> deltaTimeCounter;
-    this->motion = TextureHolder::GetTrafficLight();
+    this->motion = TextureHolder::GetInstance()->GetTrafficLight();
     Object::load(fin);
 }

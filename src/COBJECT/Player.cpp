@@ -87,5 +87,5 @@ void Player::load(std::ifstream& fin) {
     fin >> X >> Y >> Width >> Height;
     Bounding_box = {X, Y, Width, Height};
     fin >> CharacterType;
-    Textures = TextureHolder::GetCharacter(CharacterType);
+    Textures = TextureHolder::GetInstance()->GetCharacter(CharacterType);
 }

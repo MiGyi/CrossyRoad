@@ -50,6 +50,6 @@ void Animal::save(std::ofstream& fout) {
 void Animal::load(std::ifstream& fin) {
     fin >> direction;
     fin >> index;
-    motion = TextureHolder::GetAnimal(index);
+    motion = TextureHolder::GetInstance()->GetAnimal(index);
     Object::load(fin);
 }

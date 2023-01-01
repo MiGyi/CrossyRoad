@@ -45,6 +45,6 @@ void Vehicle::save(std::ofstream& fout) {
 void Vehicle::load(std::ifstream& fin) {
     fin >> direction;
     fin >> index;
-    motion = TextureHolder::GetVehicle();
+    motion = TextureHolder::GetInstance()->GetVehicle();
     Object::load(fin);
 }

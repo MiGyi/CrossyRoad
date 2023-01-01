@@ -16,12 +16,6 @@ enum class RoomState {
     GameOver
 };
 
-enum class RoomState {
-    Running,
-    Paused,
-    GameOver
-};
-
 class Room{
 private:
     RoomState state = RoomState::Running;
