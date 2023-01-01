@@ -95,9 +95,10 @@ void Game::updateMenu() {
     else if (curPressed == MenuOptions::EXIT) {
         state = ScreenState::NONE;
     }
-
-    // } else if (curPressed == MenuOptions::LOADGAME) {
-    //     loadGame();
+    else if (curPressed == MenuOptions::LOADGAME) {
+         loadGame();
+         state = ScreenState::INGAME;
+    }
 
     // Draw
     BeginDrawing();
