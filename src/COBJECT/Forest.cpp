@@ -37,11 +37,16 @@ Forest::~Forest() {
 void Forest::save(std::ofstream& fout) {
     fout << "0\n";
     fout << type << '\n';
+    //fout << "Forest_start\n";
     Line::save(fout);
+    //fout << "Forest_end\n";
 }
 
 void Forest::load(std::ifstream& fin, Texture2D* texture, int type) {
     this->texture = texture;
     this->type = type;
+    //string comment;
+    //fin >> comment;
     Line::load(fin);
+    //fin >> comment;
 }

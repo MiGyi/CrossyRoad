@@ -112,6 +112,6 @@ void Game::saveGame() {
 }
 
 void Game::loadGame() {
-    //room = new Room();
+    if (!room) room = new Room();
     room->load();
 }

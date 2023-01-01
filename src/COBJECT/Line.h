@@ -18,7 +18,7 @@
 class Line {
     protected:
         Texture2D *texture = nullptr;
-        float x, y;
+        float x = 0, y;
         float speed;
         std::vector <Object *> Objects;
         bool isSafe = false;

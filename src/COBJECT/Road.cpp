@@ -73,12 +73,21 @@ Road::~Road() {
 
 void Road::save(std::ofstream& fout) {
     fout << "1\n";
+    //fout << "Road_start\n";
+    //fout << "trafficLight_start\n";
     trafficLight->save(fout);
+    //fout << "trafficLight_end\n";
     Line::save(fout);
+    //fout << "Road_end\n";
 }
 
 void Road::load(std::ifstream& fin, Texture2D* texture) {
     this->texture = texture;
+    //string comment;
+    //fin >> comment;
+    //fin >> comment;
     trafficLight->load(fin);
+    //fin >> comment;
     Line::load(fin);
+    //fin >> comment;
 }
