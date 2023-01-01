@@ -13,7 +13,7 @@ Game::Game() {
     //--------------------------------------------------------------------------------------
 
     // Init texture holder
-    TextureHolder::LoadAllTexture();
+    TextureHolder::GetInstance();
     menu = new Menu();
 }
 
@@ -21,7 +21,7 @@ Game::~Game() {
     if (room) delete room;
     if (menu) delete menu;
 
-    TextureHolder::UnloadAllTexture();
+    delete TextureHolder::GetInstance();
     //--------------------------------------------------------------------------------------
     CloseWindow();                  // Close window and OpenGL context
     //--------------------------------------------------------------------------------------

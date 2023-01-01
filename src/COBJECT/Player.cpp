@@ -25,7 +25,7 @@ Player::Player(int Character)
     x = (screenWidth - PeopleWidth) / 2;
     y = screenHeight - PeopleHeight;
     isAlive = true;
-    Textures = TextureHolder::GetCharacter(Character);
+    Textures = TextureHolder::GetInstance()->GetCharacter(Character);
     Bounding_box = { this->x + 10, this->y, PeopleWidth - 10, PeopleHeight};
 }
 

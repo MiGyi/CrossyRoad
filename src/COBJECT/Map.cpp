@@ -39,8 +39,8 @@ Map::Map() { // Default constructor for testing, will be removed later, default 
 // }
 
 Map::Map(float speed, int NumOfLanes, int NumOfVehicles, int NumOfAnimals) {
-    LaneTexture[0] = TextureHolder::GetForestTextures();
-    LaneTexture[1] = TextureHolder::GetRoadTextures();
+    LaneTexture[0] = TextureHolder::GetInstance()->GetForestTextures();
+    LaneTexture[1] = TextureHolder::GetInstance()->GetRoadTextures();
     RegenMap(speed, NumOfLanes, NumOfVehicles, NumOfAnimals);
 }
 

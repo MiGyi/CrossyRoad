@@ -2,12 +2,22 @@
 
 using namespace std;
 
-std::vector <Texture2D *> TextureHolder::Character[NumberOfCharacter];
-std::vector <Texture2D *> TextureHolder::Vehicle;
-std::vector <Texture2D *> TextureHolder::Animal[NumberOfAnimal];
-std::vector <Texture2D *> TextureHolder::Traffic_light;
-std::vector <Texture2D *> TextureHolder::Forest;
-std::vector <Texture2D *> TextureHolder::Road;
+TextureHolder *TextureHolder::instance = nullptr;
+
+TextureHolder *TextureHolder::GetInstance() {
+    if (instance == nullptr) {
+        instance = new TextureHolder();
+    }
+    return instance;
+}
+
+TextureHolder::TextureHolder() {
+    LoadAllTexture();
+}
+
+TextureHolder::~TextureHolder() {
+    UnloadAllTexture();
+}
 
 void TextureHolder::LoadAllTexture() {
     // Load Character Texture

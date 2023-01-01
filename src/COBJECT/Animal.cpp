@@ -9,7 +9,7 @@ Animal::Animal(float y, float speed, bool FromLeftToRight, int index) {
     this->direction = FromLeftToRight ? 1 : -1;
     this->index = index;
     if (!FromLeftToRight && speed > 0) speed = -speed;
-    this->motion = TextureHolder::GetAnimal(index);
+    this->motion = TextureHolder::GetInstance()->GetAnimal(index);
 
 }
 

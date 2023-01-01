@@ -7,27 +7,33 @@
 #include <vector>
 #include <string>
 
+// Singleton class
 class TextureHolder {
 private:
-    static std::vector <Texture2D *> Character[NumberOfCharacter];
-    static std::vector <Texture2D *> Vehicle;
-    static std::vector <Texture2D *> Animal[NumberOfAnimal];
-    static std::vector <Texture2D *> Traffic_light;
-    static std::vector <Texture2D *> Forest;
-    static std::vector <Texture2D *> Road;
+    TextureHolder();
+    void LoadAllTexture();
+    void UnloadAllTexture();
+
+    static TextureHolder *instance;
+
+    std::vector <Texture2D *> Character[NumberOfCharacter];
+    std::vector <Texture2D *> Vehicle;
+    std::vector <Texture2D *> Animal[NumberOfAnimal];
+    std::vector <Texture2D *> Traffic_light;
+    std::vector <Texture2D *> Forest;
+    std::vector <Texture2D *> Road;
     
 public:
-    // TextureHolder();
-    // ~TextureHolder();
-    static void LoadAllTexture();
-    static void UnloadAllTexture();
+    ~TextureHolder();
+    static TextureHolder *GetInstance();
+
     void LoadTexture(const std::string& filepath, const std::string& name);
-    static std::vector <Texture2D *> GetCharacter(int Character);
-    static std::vector <Texture2D *> GetForestTextures();
-    static Texture2D *GetForest(int ForestType);
-    static std::vector <Texture2D *> GetRoadTextures();
-    static Texture2D *GetRoad(int RoadType);
-    static std::vector <Texture2D *> GetTrafficLight();
-    static std::vector <Texture2D *> GetVehicle();
-    static std::vector <Texture2D *> GetAnimal(int Animal);
+    std::vector <Texture2D *> GetCharacter(int Character);
+    std::vector <Texture2D *> GetForestTextures();
+    Texture2D *GetForest(int ForestType);
+    std::vector <Texture2D *> GetRoadTextures();
+    Texture2D *GetRoad(int RoadType);
+    std::vector <Texture2D *> GetTrafficLight();
+    std::vector <Texture2D *> GetVehicle();
+    std::vector <Texture2D *> GetAnimal(int Animal);
 };

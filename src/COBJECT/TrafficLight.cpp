@@ -7,7 +7,7 @@ TrafficLight::TrafficLight(float y) {
     this->x = 0;
     this->y = y;
     this->speed = 0;
-    this->motion = TextureHolder::GetTrafficLight();
+    this->motion = TextureHolder::GetInstance()->GetTrafficLight();
 }
 
 void TrafficLight::Update(float DeltaTime) {

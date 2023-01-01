@@ -10,7 +10,7 @@ Vehicle::Vehicle(float y, float speed, bool FromLeftToRight, int index) {
     this->direction = FromLeftToRight ? -1 : 1;
     this->index = index;
     if (!FromLeftToRight && speed > 0) speed = -speed;
-    this->motion = TextureHolder::GetVehicle();
+    this->motion = TextureHolder::GetInstance()->GetVehicle();
 }
 
 void Vehicle::Update(float DeltaTime) {
