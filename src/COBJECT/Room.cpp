@@ -7,6 +7,7 @@ Room::Room() { //default constructor for testing purpose
     // Choose character function
     player = new Player(GetRandomValue(0, 2));
     map = new Map(this->speed, 9, 6, 6);
+    score = new Score();
 }
 
 Room::~Room() {
@@ -34,6 +35,7 @@ bool Room::Update(float GFT) {
 void Room::Draw() {
     map->Draw();
     player->Draw();
+    score->Draw();
 }
 
 void Room::pauseToggle() {
@@ -47,7 +49,7 @@ void Room::pauseToggle() {
 
 void Room::save() {
     std::ofstream fout("save.txt");
-    fout << score << '\n';
+    score->save(fout);
     fout << speed << '\n';
     player->save(fout);
     map->save(fout);
@@ -56,7 +58,7 @@ void Room::save() {
 
 void Room::load() {
     std::ifstream fin("save.txt");
-    fin >> score;
+    score->load(fin);
     fin >> speed;
     player->load(fin);
     map->load(fin);

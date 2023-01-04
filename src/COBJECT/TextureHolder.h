@@ -22,6 +22,7 @@ private:
     std::vector <Texture2D *> Traffic_light;
     std::vector <Texture2D *> Forest;
     std::vector <Texture2D *> Road;
+    std::vector <Texture2D *> Item[NumberOfItems];
     
 public:
     ~TextureHolder();

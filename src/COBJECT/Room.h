@@ -2,6 +2,7 @@
 #include "Object.h"
 #include "Map.h"
 #include "Player.h"
+#include "Score.h"
 #include "TextureHolder.h"
 
 #include <math.h>
@@ -19,10 +20,11 @@ enum class RoomState {
 class Room{
 private:
     RoomState state = RoomState::Running;
-    int score = 0;
     float speed = BaseSpeed;
+
     Player *player = nullptr;
     Map *map = nullptr;
+    Score *score = nullptr;
 public:
     Room();
     ~Room();

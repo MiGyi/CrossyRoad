@@ -28,6 +28,7 @@ const int NumberOfCharacter = 3;
 const int NumberOfTrafficLight = 3;
 const int NumberOfVehicle = 3;
 const int NumberOfAnimal = 4;
+const int NumberOfItems = 3;
 
 const float BaseSpeed = 100.0f;
 const float AnimalAnimationSpeed = 1.25f;

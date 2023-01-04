@@ -130,6 +130,15 @@ void TextureHolder::UnloadAllTexture() {
         delete Road[i];
     }
     Road.clear();
+
+    // Unload Item Texture
+    for (int i = 0; i < NumberOfItems; i++) {
+        for (int j = 0; j < (int)Item[i].size(); j++) {
+            UnloadTexture(*Item[i][j]);
+            delete Item[i][j];
+        }
+        Item[i].clear();
+    }
 }
 
 vector <Texture2D *> TextureHolder::GetCharacter(int Character) {
