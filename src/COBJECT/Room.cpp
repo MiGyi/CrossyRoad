@@ -46,7 +46,6 @@ void Room::pauseToggle() {
     }
 }
 
-
 void Room::save() {
     std::ofstream fout("save.txt");
     score->save(fout);

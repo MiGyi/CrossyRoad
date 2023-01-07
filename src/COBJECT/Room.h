@@ -27,11 +27,17 @@ private:
     Score *score = nullptr;
 public:
     Room();
+    Room(int Character) {
+        player = new Player(Character);
+        map = new Map(this->speed, 9, 6, 6);
+        score = new Score();
+    }
     ~Room();
     bool Collision();
     bool Update(float GFT);
     void Draw();
     void pauseToggle();
+    int GetScore() { return 0;}
 
     void save();
     void load();

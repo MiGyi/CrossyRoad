@@ -7,6 +7,7 @@
 #include "TextureHolder.h"
 #include "Room.h"
 #include "Menu.h"
+#include "Setting.h"
 #include "../Helper/Const.h"
 
 #include <iostream>
@@ -19,6 +20,7 @@ enum class ScreenState {
     MENU,
     INGAME,
     SCOREBOARD,
+    SETTING,
     NONE = -1
 };
 
@@ -26,6 +28,7 @@ class Game {
     private:
         Room *room = nullptr;
         Menu *menu = nullptr;
+        Setting setting;
         int score = 0;
         ScreenState state = ScreenState::MENU;
 
@@ -35,6 +38,7 @@ class Game {
         ~Game();
         void updateRoom();
         void updateMenu();
+        void updateSetting();
         void run();
         void saveGame();
         void loadGame();

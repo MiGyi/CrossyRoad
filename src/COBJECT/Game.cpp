@@ -52,6 +52,10 @@ void Game::run() {
                 updateScoreboard();
                 break;
             }
+            case ScreenState::SETTING: {
+                updateSetting();
+                break;
+            }
             default:
                 break;
         }
@@ -99,7 +103,8 @@ void Game::updateMenu() {
     MenuOptions curPressed = menu->Update();
     if (curPressed == MenuOptions::NEWGAME) {
         // Create new room and start game
-        room = new Room();
+        SetTargetFPS(setting.GetFPS());
+        room = new Room(setting.GetCharacter());
         state = ScreenState::INGAME;
     }
     else if (curPressed == MenuOptions::EXIT) {
@@ -111,6 +116,9 @@ void Game::updateMenu() {
     }
     else if (curPressed == MenuOptions::SCOREBOARD) {
         state = ScreenState::SCOREBOARD;
+    }
+    else if (curPressed == MenuOptions::SETTING) {
+        state = ScreenState::SETTING;
     }
     // Draw
     BeginDrawing();
@@ -135,6 +143,15 @@ void Game::updateScoreboard() {
         DrawText("Press Enter to go back to menu", screenWidth / 2 - MeasureText("Press Enter to go back to menu", 16) / 2, 800, 20, WHITE);
         DrawFPS(0, 0);
     EndDrawing();
+}
+
+void Game::updateSetting() {
+    if (IsKeyPressed(KEY_ENTER)) {
+        state = ScreenState::MENU;
+    }
+
+    setting.Update();
+    setting.Draw();
 }
 
 void Game::saveGame() {

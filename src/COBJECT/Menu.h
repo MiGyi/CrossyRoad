@@ -17,14 +17,16 @@ using namespace std;
 enum class MenuOptions {
     NEWGAME,
     LOADGAME,
+    SCOREBOARD,
+    SETTING,
     EXIT,
     NONE = -1
 };
 
 class Menu {
 private:
-    const int numMenuOptions = 3;
-    const string menuOptions[3] = { "New Game", "Load Game", "Exit" }; 
+    const int numMenuOptions = 5;
+    const string menuOptions[5] = { "New Game", "Load Game", "Scoreboard", "Setting", "Exit" }; 
     MenuOptions curOption = MenuOptions::NEWGAME;
     
 public:

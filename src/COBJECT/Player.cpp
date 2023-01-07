@@ -8,7 +8,7 @@ Player::Player()
     y = screenHeight - PeopleHeight;
     isAlive = true;
 
-    Bounding_box = { this->x, this->y, PeopleWidth, PeopleHeight };
+    Bounding_box = { this->x + 10, this->y, PeopleWidth - 10, PeopleHeight};
 }
 
 // Player::Player(TextureHolder *TextureHD, int Character)
@@ -63,7 +63,7 @@ Rectangle Player::getBoundingBox() {
 
 void Player::Draw() {
     DrawTexturePro(*Textures[motion_index], { 0, 0, PeopleWidth, PeopleHeight }, { x - 20, y - 20, PeopleWidth + 40, PeopleHeight + 20}, { 0, 0 }, 0, WHITE);
-    DrawRectangleLines(this->x + 10, this->y, PeopleWidth - 20, PeopleHeight, RED);
+    DrawRectangleLines(x + 10, y, PeopleWidth - 20, PeopleHeight, RED);
 }
 
 Player::~Player() {
