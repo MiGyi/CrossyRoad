@@ -15,9 +15,13 @@ Game::Game() {
     // Init texture holder
     TextureHolder::GetInstance();
     menu = new Menu();
+
+    LoadBestScores();
 }
 
 Game::~Game() {
+    SaveBestScores();
+
     if (room) delete room;
     if (menu) delete menu;
 
@@ -44,6 +48,10 @@ void Game::run() {
             // Exit game
                 return;
             }
+            case ScreenState::SCOREBOARD: {
+                updateScoreboard();
+                break;
+            }
             default:
                 break;
         }
@@ -69,6 +77,8 @@ void Game::updateRoom() {
     float GFT = GetFrameTime();
     if (!room->Update(GFT)) {
         // Delete room and return to menu
+        UpdateBestScores();
+
         delete room;
         room = nullptr;
         state = ScreenState::MENU;
@@ -99,11 +109,30 @@ void Game::updateMenu() {
          loadGame();
          state = ScreenState::INGAME;
     }
-
+    else if (curPressed == MenuOptions::SCOREBOARD) {
+        state = ScreenState::SCOREBOARD;
+    }
     // Draw
     BeginDrawing();
         ClearBackground(GRAY);
         menu->Draw();
+        DrawFPS(0, 0);
+    EndDrawing();
+}
+
+void Game::updateScoreboard() {
+    if (IsKeyPressed(KEY_ENTER)) {
+        state = ScreenState::MENU;
+    }
+
+    BeginDrawing();
+        ClearBackground(BLACK);
+        int st = 0;
+        for (auto it = BestScores.rbegin(); it != BestScores.rend(); ++it) {
+            st++;
+            DrawText((to_string(st) + ".  " + to_string(*it)).c_str(), 100, st * 70, 16, WHITE);
+        }
+        DrawText("Press Enter to go back to menu", screenWidth / 2 - MeasureText("Press Enter to go back to menu", 16) / 2, 800, 20, WHITE);
         DrawFPS(0, 0);
     EndDrawing();
 }
@@ -115,4 +144,28 @@ void Game::saveGame() {
 void Game::loadGame() {
     if (!room) room = new Room();
     room->load();
+}
+
+void Game::UpdateBestScores() {
+    BestScores.insert(room->GetScore());
+    if ((int)BestScores.size() > 10) BestScores.erase(BestScores.begin());
+}
+
+void Game::SaveBestScores() {
+    ofstream fout("scores.txt");
+    fout << BestScores.size() << '\n';
+    for (int x : BestScores) fout << x << ' ';
+    fout.close();
+}
+
+void Game::LoadBestScores() {
+    ifstream fin("scores.txt");
+    if (!fin.good()) return;
+    int n;
+    fin >> n;
+    for (int i = 0, x; i < n; ++i) {
+        fin >> x;
+        BestScores.insert(x);
+    }
+    fin.close();
 }
