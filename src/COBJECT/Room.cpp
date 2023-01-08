@@ -36,6 +36,10 @@ void Room::Draw() {
     map->Draw();
     player->Draw();
     score->Draw();
+
+    if (state == RoomState::Paused) {
+        DrawText("PAUSED", screenWidth / 2 - MeasureText("PAUSED", 40) / 2, screenHeight / 2 - 20, 40, BLACK);
+    }
 }
 
 void Room::pauseToggle() {
