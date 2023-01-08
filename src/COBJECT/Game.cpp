@@ -127,7 +127,7 @@ void Game::updateMenu() {
     BeginDrawing();
         ClearBackground(GRAY);
         menu->Draw();
-        DrawFPS(0, 0);
+        // DrawFPS(0, 0);
     EndDrawing();
 }
 
