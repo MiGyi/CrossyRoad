@@ -8,12 +8,15 @@ Menu::~Menu() {
 
 MenuOptions Menu::Update() {
     if (IsKeyPressed(KEY_DOWN)) {
+        PlaySound(SoundHolder::GetInstance().GetClickSound());
         curOption = (MenuOptions)(((int)curOption + 1) % numMenuOptions);
     }
     else if (IsKeyPressed(KEY_UP)) {
+        PlaySound(SoundHolder::GetInstance().GetClickSound());
         curOption = (MenuOptions)((((int)curOption) + numMenuOptions - 1) % numMenuOptions);
     }
     if (IsKeyPressed(KEY_ENTER)) {
+        PlaySound(SoundHolder::GetInstance().GetClickSound());
         return curOption;
     }
     
