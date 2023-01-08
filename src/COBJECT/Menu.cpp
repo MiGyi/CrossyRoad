@@ -24,14 +24,18 @@ MenuOptions Menu::Update() {
 }
 
 void Menu::Draw() {
+    // Draw title
+    // font size = 80
+    DrawText(menuTitle.c_str(), screenWidth / 2 - MeasureText(menuTitle.c_str(), 80) / 2, screenHeight / 2 - 300, 80, BLACK);
+    // Draw options
     for (int i = 0; i < numMenuOptions; i++) {
         if (i == (int)curOption)
         {
-            DrawText(menuOptions[i].c_str(), screenWidth / 2 - MeasureText(menuOptions[i].c_str(), 20) / 2, screenHeight / 2 - 20 + i * 40, 20, RED);
+            DrawText(menuOptions[i].c_str(), screenWidth / 2 - MeasureText(menuOptions[i].c_str(), 40) / 2, screenHeight / 2 - 40 + i * 80, 40, RED);
         }
         else
         {
-            DrawText(menuOptions[i].c_str(), screenWidth / 2 - MeasureText(menuOptions[i].c_str(), 20) / 2, screenHeight / 2 - 20 + i * 40, 20, BLACK);
+            DrawText(menuOptions[i].c_str(), screenWidth / 2 - MeasureText(menuOptions[i].c_str(), 40) / 2, screenHeight / 2 - 40 + i * 80, 40, BLACK);
         }
     }
 }

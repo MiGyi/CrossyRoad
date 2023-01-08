@@ -26,6 +26,7 @@ enum class MenuOptions {
 
 class Menu {
 private:
+    const string menuTitle = "CROSSY ROAD";
     const int numMenuOptions = 5;
     const string menuOptions[5] = { "New Game", "Load Game", "Scoreboard", "Setting", "Exit" }; 
     MenuOptions curOption = MenuOptions::NEWGAME;
