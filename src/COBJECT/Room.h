@@ -37,7 +37,7 @@ public:
     bool Update(float GFT);
     void Draw();
     void pauseToggle();
-    int GetScore() { return 0;}
+    int GetScore() { return score->GetScore();}
 
     void save();
     void load();

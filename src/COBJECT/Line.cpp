@@ -25,6 +25,10 @@ void Line::Update(float DeltaTime) {
     for (auto &i : Objects) {
         i->Update(DeltaTime);
     }
+
+    for (auto &i : Coins) {
+        i->Update(DeltaTime);
+    }
 }
 
 void Line::Draw() {
@@ -32,6 +36,10 @@ void Line::Draw() {
     else DrawTexturePro(*texture, { 0, y, LaneWidth, LaneHeight }, {0, y, LaneWidth, LaneHeight}, { 0, 0 }, 0, WHITE);
     //DrawRectangleRec({ 0, y, screenWidth, LineHeight }, GREEN);
     for (auto &i : Objects) {
+        i->Draw();
+    }
+
+    for (auto &i : Coins) {
         i->Draw();
     }
 }
@@ -51,6 +59,37 @@ void Line::ClearObject() {
     }
 }
 
+void Line::GenerateCoin() {
+    if (isSafe) return;
+    int n = GetRandomValue(0, 2);
+    for (int i = 0; i < n; ++i) {
+        Coin* coin = new Coin(GetRandomValue(0, 27) * 50 + 7, y + 36);
+        Coins.push_back(coin);
+    }
+}
+
+void Line::ClearCoin() {
+    while (!Coins.empty()) {
+        delete Coins.back();
+        Coins.pop_back();
+    }
+}
+
+int Line::GetScore(Rectangle Player) {
+    if (isSafe) return 0;
+    int score = 0;
+    vector<Coin*> NewCoins;
+    for (auto &i : Coins) {
+        if (CheckCollisionRecs(Player, i->getBoundingBox())) {
+            score++;
+            delete i;
+        }
+        else NewCoins.push_back(i);
+    }
+    Coins = NewCoins;
+    return score;
+}
+
 void Line::save(std::ofstream& fout) {
     fout << x << ' ' << y << '\n';
     fout << speed << '\n';
@@ -59,6 +98,11 @@ void Line::save(std::ofstream& fout) {
     fout << Objects.size() << '\n';
     for (int i = 0; i < (int)Objects.size(); ++i) {
         Objects[i]->save(fout);
+    }
+
+    fout << Coins.size() << '\n';
+    for (auto coin : Coins) {
+        coin->save(fout);
     }
 }
 
@@ -83,5 +127,12 @@ void Line::load(std::ifstream& fin) {
             animal->load(fin);
             Objects.push_back(animal);
         }
+    }
+
+    fin >> n;
+    for (int i = 0; i < n; ++i) {
+        Coin* coin = new Coin(0, 0);
+        coin->load(fin);
+        Coins.push_back(coin);
     }
 }

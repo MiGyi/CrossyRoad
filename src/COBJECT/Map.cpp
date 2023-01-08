@@ -74,6 +74,14 @@ bool Map::Collision(Rectangle Player) {
     return false;
 }
 
+int Map::GetScore(Rectangle Player) {
+    int score = 0;
+    for (auto &i : Lines) {
+        score += i->GetScore(Player);
+    }
+    return score;
+}
+
 void Map::Update(float DeltaTime) {
 
     for (auto &i : Lines) {

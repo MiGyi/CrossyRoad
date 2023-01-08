@@ -78,6 +78,14 @@ void TextureHolder::LoadAllTexture() {
         GetTexture(VehicleWidth, VehicleHeight, vehicle_textures_filepath + char(i + '0') + ".png", *texture);
         Vehicle.push_back(texture);
     }
+
+    //Load Coin Texture
+    string coin_textures_filepath = "../resources/Pictures/Items/0/";
+    for (int i = 0; i < 8; ++i) {
+        Texture2D *texture = new Texture2D();
+        GetTexture(CoinWidth, CoinHeight, coin_textures_filepath + char(i + '0') + ".png", *texture);
+        Coin.push_back(texture);
+    }
 }
 
 // TextureHolder::~TextureHolder() {
@@ -139,6 +147,12 @@ void TextureHolder::UnloadAllTexture() {
         }
         Item[i].clear();
     }
+
+    // Unload coin Texture
+    for (int i = 0; i < (int)Coin.size(); ++i) {
+        UnloadTexture(*Coin[i]);
+        delete Coin[i];
+    }
 }
 
 vector <Texture2D *> TextureHolder::GetCharacter(int Character) {
@@ -175,4 +189,8 @@ vector <Texture2D *> TextureHolder::GetAnimal(int index) {
 
 void TextureHolder::LoadTexture(const string& filepath, const string& name) {
     //TODO
+}
+
+std::vector <Texture2D *> TextureHolder::GetCoin() {
+    return TextureHolder::Coin;
 }

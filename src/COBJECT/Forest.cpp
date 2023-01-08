@@ -16,6 +16,7 @@ Forest::Forest(Texture2D *texture, int type, float y, bool isSafe, float speed, 
     this->speed = speed;
     this->isSafe = isSafe;
     this->MaxObject = isSafe ? 0 : MaxObject;
+    GenerateCoin();
 }
 
 void Forest::GenerateObject() {
@@ -31,6 +32,7 @@ void Forest::GenerateObject() {
 
 Forest::~Forest() {
     ClearObject();
+    ClearCoin();
     texture = nullptr;
 }
 

@@ -29,6 +29,8 @@ bool Room::Update(float GFT) {
     }
     map->Update(GFT);
 
+    score->increase(map->GetScore(player->getBoundingBox()));
+
     return !Collision();
 }
 
