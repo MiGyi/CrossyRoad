@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Score.h"
 #include "TextureHolder.h"
+#include "SoundHolder.h"
 
 #include <math.h>
 #include <string>

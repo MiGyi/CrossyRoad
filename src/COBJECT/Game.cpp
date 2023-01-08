@@ -81,6 +81,7 @@ void Game::updateRoom() {
     float GFT = GetFrameTime();
     if (!room->Update(GFT)) {
         // Delete room and return to menu
+        StopSound(SoundHolder::GetInstance().GetBackgoundSound());
         UpdateBestScores();
 
         delete room;
@@ -106,6 +107,7 @@ void Game::updateMenu() {
         SetTargetFPS(setting.GetFPS());
         room = new Room(setting.GetCharacter());
         state = ScreenState::INGAME;
+        PlaySound(SoundHolder::GetInstance().GetBackgoundSound());
     }
     else if (curPressed == MenuOptions::EXIT) {
         state = ScreenState::NONE;
@@ -113,6 +115,7 @@ void Game::updateMenu() {
     else if (curPressed == MenuOptions::LOADGAME) {
          loadGame();
          state = ScreenState::INGAME;
+        PlaySound(SoundHolder::GetInstance().GetBackgoundSound());
     }
     else if (curPressed == MenuOptions::SCOREBOARD) {
         state = ScreenState::SCOREBOARD;

@@ -41,8 +41,10 @@ void Room::Draw() {
 void Room::pauseToggle() {
     if (state == RoomState::Running) {
         state = RoomState::Paused;
+        PauseSound(SoundHolder::GetInstance().GetBackgoundSound());
     } else if (state == RoomState::Paused) {
         state = RoomState::Running;
+        ResumeSound(SoundHolder::GetInstance().GetBackgoundSound());
     }
 }
 

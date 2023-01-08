@@ -9,6 +9,7 @@
 #include "Menu.h"
 #include "Setting.h"
 #include "../Helper/Const.h"
+#include "SoundHolder.h"
 
 #include <iostream>
 #include <vector>

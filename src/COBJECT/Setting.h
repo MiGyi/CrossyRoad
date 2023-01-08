@@ -34,6 +34,14 @@ class Setting {
         if (IsKeyPressed(KEY_LEFT)) MainSetting[OptionIndex] = (MainSetting[OptionIndex] + MaxOption[OptionIndex] - 1) % MaxOption[OptionIndex];
         if (IsKeyPressed(KEY_DOWN)) OptionIndex = (OptionIndex + 1) % 3;
         if (IsKeyPressed(KEY_UP)) OptionIndex = (OptionIndex + 2) % 3;
+
+        // temporary
+        if (GetMute()) {
+            SetMasterVolume(0);
+        }
+        else {
+            SetMasterVolume(1);
+        }
     }
 
     void Draw() {

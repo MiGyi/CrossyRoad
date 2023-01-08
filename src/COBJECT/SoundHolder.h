@@ -17,6 +17,7 @@ private:
 
     Sound collsionSound;
     Sound clickSound;
+    Sound backgoundSound;
 
     void LoadAllSound();
 
@@ -25,4 +26,5 @@ public:
 
     Sound GetCollisionSound();
     Sound GetClickSound();
+    Sound GetBackgoundSound();
 };
