@@ -17,6 +17,7 @@ Road::Road(Texture2D *texture, float y, bool isSafe, float speed, int MaxObject)
     this->isSafe = isSafe;
     this->MaxObject = isSafe ? 0 : MaxObject;
     this->trafficLight = new TrafficLight(y);
+    GenerateCoin();
 }
 
 void Road::Update(float DeltaTime) {
@@ -44,6 +45,10 @@ void Road::Update(float DeltaTime) {
     }
 
     trafficLight->Update(DeltaTime);
+
+    for (auto &i : Coins) {
+        i->Update(DeltaTime);
+    }
 }
 
 void Road::Draw() {
@@ -51,6 +56,10 @@ void Road::Draw() {
         else DrawTexturePro(*texture, { 0, y, LaneWidth, LaneHeight }, {0, y, LaneWidth, LaneHeight}, { 0, 0 }, 0, WHITE);
     for (auto &object : Objects) object->Draw();
     trafficLight->Draw();
+
+    for (auto &i : Coins) {
+        i->Draw();
+    }
 }
 
 void Road::GenerateObject() {
@@ -66,6 +75,7 @@ void Road::GenerateObject() {
 
 Road::~Road() {
     ClearObject();
+    ClearCoin();
     texture = nullptr;
     delete trafficLight;
     trafficLight = nullptr;

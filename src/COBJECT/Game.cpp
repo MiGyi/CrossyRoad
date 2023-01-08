@@ -141,7 +141,7 @@ void Game::updateScoreboard() {
         int st = 0;
         for (auto it = BestScores.rbegin(); it != BestScores.rend(); ++it) {
             st++;
-            DrawText((to_string(st) + ".  " + to_string(*it)).c_str(), 100, st * 70, 16, WHITE);
+            DrawText((to_string(st) + ".  " + to_string(*it)).c_str(), 100, st * 70, 20, WHITE);
         }
         DrawText("Press Enter to go back to menu", screenWidth / 2 - MeasureText("Press Enter to go back to menu", 16) / 2, 800, 20, WHITE);
         DrawFPS(0, 0);

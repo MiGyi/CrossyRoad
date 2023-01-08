@@ -14,11 +14,13 @@ class Score {
 private:
     int score = 0;
 public:
-    void increase();
+    void increase(int x = 1);
 
     void Draw();
 
     void save(std::ofstream& fout);
-    
+
     void load(std::ifstream& fin);
+
+    int GetScore();
 };

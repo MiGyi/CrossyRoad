@@ -6,7 +6,7 @@
 #include "Object.h"
 #include "Vehicle.h"
 #include "Animal.h"
-
+#include "Coin.h"
 
 #include <algorithm>
 #include <math.h>
@@ -23,6 +23,7 @@ class Line {
         std::vector <Object *> Objects;
         bool isSafe = false;
         int MaxObject;
+        std::vector <Coin *> Coins;
 
     public:
         virtual ~Line() {}
@@ -31,6 +32,10 @@ class Line {
         virtual void GenerateObject() = 0;
         bool Collision(Rectangle Player);
         void ClearObject();
+
+        void GenerateCoin();
+        void ClearCoin();
+        int GetScore(Rectangle Player);
 
         virtual void save(std::ofstream& fout);
         virtual void load(std::ifstream& fin);

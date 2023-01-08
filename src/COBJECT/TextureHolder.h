@@ -23,7 +23,8 @@ private:
     std::vector <Texture2D *> Forest;
     std::vector <Texture2D *> Road;
     std::vector <Texture2D *> Item[NumberOfItems];
-    
+    std::vector <Texture2D *> Coin;
+
 public:
     ~TextureHolder();
     static TextureHolder *GetInstance();
@@ -37,4 +38,5 @@ public:
     std::vector <Texture2D *> GetTrafficLight();
     std::vector <Texture2D *> GetVehicle();
     std::vector <Texture2D *> GetAnimal(int Animal);
+    std::vector <Texture2D *> GetCoin();
 };

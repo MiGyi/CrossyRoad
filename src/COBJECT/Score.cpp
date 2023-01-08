@@ -1,7 +1,7 @@
 #include "Score.h"
 
-void Score::increase() {
-    score++;
+void Score::increase(int x) {
+    score += x;
 }
 
 void Score::Draw() {
@@ -16,3 +16,6 @@ void Score::load(std::ifstream& fin) {
     fin >> score;
 }
 
+int Score::GetScore() {
+    return score;
+}

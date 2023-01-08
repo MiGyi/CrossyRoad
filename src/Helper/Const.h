@@ -19,7 +19,11 @@ const int VehicleHeight = 70;
 const int AnimalWidth = 48;
 const int AnimalHeight = 48;
 
+const int CoinWidth = 36;
+const int CoinHeight = 36;
+
 const int NumberOfLine = 9;
+const int MaxCoinPerLine = 2;
 
 const int LaneHeight = screenHeight / NumberOfLine; // 1 map = 9 lanes
 const int LaneWidth = screenWidth;

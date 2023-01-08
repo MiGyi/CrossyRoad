@@ -30,6 +30,7 @@ class Map {
         Map(float speed, int NumOfLanes, int NumOfVehicles, int NumOfAnimals);
         void GenLane();
         bool Collision(Rectangle Player);
+        int GetScore(Rectangle Player);
         void Update(float DeltaTime);
         void Draw();
         void RegenMap(float Speed, int NumOfLines, int NumOfVehicles, int NumOfAnimals);

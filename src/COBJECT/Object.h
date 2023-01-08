@@ -17,7 +17,7 @@ class Object {
         float motion_timer = 0.0f;
         int motion_index = 0;
         Rectangle Bounding_box;
-        float speed;
+        float speed = 0;
     public:
         virtual void Update(float DeltaTime) = 0;
         Rectangle GetBoundingBox() { return Bounding_box; }
