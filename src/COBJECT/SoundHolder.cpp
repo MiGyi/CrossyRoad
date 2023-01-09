@@ -26,11 +26,16 @@ Sound SoundHolder::GetCoinSound() {
     return coinSound;
 }
 
+Sound SoundHolder::GetEngineSound() {
+    return engineSound;
+}
+
 void SoundHolder::LoadAllSound() {
     collsionSound = LoadSound("../resources/Sounds/collision.wav");
     clickSound = LoadSound("../resources/Sounds/click.wav");
     backgoundSound = LoadSound("../resources/Sounds/background.mp3");
     coinSound = LoadSound("../resources/Sounds/coin.wav");
+    engineSound = LoadSound("../resources/Sounds/engine.wav");
 }
 
 SoundHolder::~SoundHolder() {
@@ -38,5 +43,6 @@ SoundHolder::~SoundHolder() {
     UnloadSound(clickSound);
     UnloadSound(backgoundSound);
     UnloadSound(coinSound);
+    UnloadSound(engineSound);
     CloseAudioDevice();
 }

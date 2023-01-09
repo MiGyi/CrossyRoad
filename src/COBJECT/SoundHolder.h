@@ -19,6 +19,7 @@ private:
     Sound clickSound;
     Sound backgoundSound;
     Sound coinSound;
+    Sound engineSound;
 
     void LoadAllSound();
 
@@ -29,4 +30,5 @@ public:
     Sound GetClickSound();
     Sound GetBackgoundSound();
     Sound GetCoinSound();
+    Sound GetEngineSound();
 };
