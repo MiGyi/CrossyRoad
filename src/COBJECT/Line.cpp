@@ -81,6 +81,7 @@ int Line::GetScore(Rectangle Player) {
     vector<Coin*> NewCoins;
     for (auto &i : Coins) {
         if (CheckCollisionRecs(Player, i->getBoundingBox())) {
+            PlaySound(SoundHolder::GetInstance().GetCoinSound());
             score++;
             delete i;
         }

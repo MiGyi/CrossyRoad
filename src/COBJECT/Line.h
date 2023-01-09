@@ -3,6 +3,7 @@
 #include "raylib.h"
 #include "../Helper/Const.h"
 #include "../Helper/TextureHelper.h"
+#include "SoundHolder.h"
 #include "Object.h"
 #include "Vehicle.h"
 #include "Animal.h"

@@ -18,6 +18,7 @@ private:
     Sound collsionSound;
     Sound clickSound;
     Sound backgoundSound;
+    Sound coinSound;
 
     void LoadAllSound();
 
@@ -27,4 +28,5 @@ public:
     Sound GetCollisionSound();
     Sound GetClickSound();
     Sound GetBackgoundSound();
+    Sound GetCoinSound();
 };
